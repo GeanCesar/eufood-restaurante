@@ -1,0 +1,74 @@
+.container-login{
+    width: 700px;
+    height: 170px;
+    top: -230px;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    position: absolute;
+    margin: auto;
+    align-items: center;    
+    justify-content: center;
+}
+
+.area-logo{
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.area-conteudo {    
+    text-align: right;
+}
+
+.area-form{    
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px 0px 10px 10px;
+    text-align: left;
+}
+
+.area-message {
+    background-color: #6A33CA;
+    display: inline-block;
+    padding: 5px 30px;
+    border-radius: 10px 10px 0 0;
+}
+
+.area-message h3 {
+    font-size: 15px;
+    color: white;
+    padding-right: 50px;
+}
+
+.container-login .area-campos{
+    display: flex;
+    align-items: center;    
+    justify-content: center;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.area-botao {
+    text-align: center;
+    margin-top: 30px;
+}
+
+#campo-telefone{
+    margin-right: 20px;
+}
+
+.fundo {
+    background-image: url("../../../../public/imgs/fundo.png");
+    background-color: #EAEAEA;
+    height: 100%;
+}
+
+#loading-bar {
+    margin-top: 20px;
+}
+
+fieldset {
+    margin: 0;
+    padding: 0;
+    border: 0;
+}

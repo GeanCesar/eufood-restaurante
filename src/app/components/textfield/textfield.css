@@ -1,0 +1,58 @@
+.texto-textfield {
+    color: #6A33CA;
+    font-weight: bold;
+    margin-bottom: 3px;
+    display: inline-block;
+    font-size: 12px;
+}
+
+.texto-textfield p {
+    color: red;
+    display: inline;
+}
+
+.campo-textfield {
+    background-color: transparent;
+    border-radius: 13px;
+    padding: 10px;
+    color:  #58586d;
+    border: 1px solid #F2F2F2;
+    font-weight: 600;
+    display: block;
+    font-size: 12px;
+}
+
+#campo-senha {    
+    color:  #58586d;
+    font-weight: bold;
+    font-size: 12px;
+}
+
+.fundo-textfield-pass {
+    background-color: transparent;
+    border-radius: 13px;
+    padding-right: 10px;
+    border: 1px solid #F2F2F2;
+    display: block;
+}
+
+.campo-textfield-pass{
+    font-weight: bold;
+    background-color: transparent;
+    padding: 10px;
+    border: 0;
+    height: 100%;
+}
+
+.campo-textfield::placeholder {
+    color: #CCCCCC;
+}
+
+#eye-icon{
+    opacity: 0.67;
+    margin-bottom: -3px;
+}
+
+#eye-icon:hover{
+    cursor: pointer;
+}

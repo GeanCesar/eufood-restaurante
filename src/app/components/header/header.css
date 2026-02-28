@@ -1,0 +1,31 @@
+.logo {
+    height: 100px;
+    width: 120px;
+    display: inline-block;
+}
+
+.header {
+    padding: 30px;
+    background-color: transparent;
+}
+
+.user {
+    float: right;
+}
+
+.user h3 {
+    display: inline-block;
+    color: #8f8f8f;
+    font-size: 13px;
+}
+
+#icon-deslogar {
+    color: #8f8f8f;
+    font-size: 18px;
+    margin-left: 15px;
+}
+
+#icon-deslogar:hover {
+    cursor: pointer;
+    color: #6A33CA;
+}

@@ -1,0 +1,20 @@
+<app-header></app-header>
+
+<div class="container">
+    <h3 class="titulo">Selecione o restaurante</h3>
+    <div class="container-restaurantes">
+        <button class="bt-adicionar" (click)="modal.toggle();">
+                <fa-icon [icon]="faPlus"/>
+        </button>
+        @for (restaurante of restaurantes(); track $index) {
+            <app-card-restaurante [restaurante]="restaurante"></app-card-restaurante>
+        }   
+    </div>
+</div>
+
+<footer></footer>
+
+<app-modal #modal class="modal-cadastro">
+    <app-cadastro-restaurante #modal_cadastro></app-cadastro-restaurante>
+</app-modal>
+

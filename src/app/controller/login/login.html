@@ -1,0 +1,42 @@
+<div class="fundo">
+        
+    <div class="container-login">
+        <div class="area-logo">
+            <app-logo></app-logo>
+        </div>
+
+        <div class="area-conteudo">
+
+            @if(mensagem()){
+                <div class="area-message">
+                    <h3>{{mensagem()}}</h3>
+                </div>
+            }            
+
+            <div class="area-form">
+                <form>
+                    <fieldset [disabled]="isDisabled()">
+                        <div class="area-campos">
+                            <textfield disabled  [(ngModel)]="usuario.telefone" name="telefone" ngDefaultControl id="campo-telefone" mascara="(00) 00000-0000" texto="Telefone" valor="" placeholder="(11) 91111-1111"></textfield>
+                            <textfield disabled [(ngModel)]="usuario.senha" name="senha" ngDefaultControl [senha]=true texto="Senha" valor="" placeholder="********"></textfield>
+                        </div>
+                        <div class="area-botao">
+                            <app-button (click)="onSubmit()" texto="ENTRAR" type="submit"/>
+                        </div> 
+                    </fieldset>                    
+                </form>
+
+                @if(progress()){
+                    <mat-progress-bar id="loading-bar" mode="indeterminate"></mat-progress-bar>
+                }                
+                
+            </div>
+        </div>        
+    </div>
+    
+    <footer></footer>
+
+</div>
+
+
+

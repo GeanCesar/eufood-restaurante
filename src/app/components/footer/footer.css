@@ -1,0 +1,27 @@
+.footer{
+    display: block;
+    background-color: #6A33CA;
+    text-align: center;
+    padding-top: 14px;
+    padding-bottom: 14px;
+    font-size: 12px;    
+    position: fixed;
+    bottom: 0px;
+    width: 100%;
+}
+
+.footer h3 {
+    display: inline;
+    margin-left: 30px;
+    color: white;
+    font-weight: normal;
+}
+
+.footer a {
+    text-decoration: none;
+}
+
+.footer h3 fa-icon {
+    color: white;
+    font-size: 20px;
+}

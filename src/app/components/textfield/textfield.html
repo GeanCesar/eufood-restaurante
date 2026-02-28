@@ -1,0 +1,10 @@
+@if (senha) {
+    <label for="campo-senha" class="texto-textfield">{{texto}} <p>{{obrigatorio ? '*' : ''}}</p></label>
+    <div class="fundo-textfield-pass">
+        <input id="campo-senha" #campo_senha class="campo-textfield-pass" autocomplete="on" placeholder="{{placeholder}}" value="{{valor}}" type="password">
+        <img id="eye-icon" (mousedown)="changeInput(campo_senha)" (mouseup)="changeInput(campo_senha)" src="imgs/eye.png">
+    </div>
+} @else {
+    <label for="campo-textfield" class="texto-textfield">{{texto}} <p>{{obrigatorio ? '*' : ''}}</p></label>
+    <input id="campo-textfield" class="campo-textfield" mask='{{mascara}}' placeholder="{{placeholder}}" value="{{valor}}" type="text">
+}

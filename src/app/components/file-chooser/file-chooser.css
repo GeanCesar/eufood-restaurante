@@ -1,0 +1,40 @@
+.texto-textfield {
+    color: #6A33CA;
+    font-weight: bold;
+    margin-bottom: 3px;
+    display: inline-block;
+    font-size: 12px;
+}
+
+.campo-texto{
+    display: inline-block;
+    width: 100%;
+    min-width: 200px;
+}
+
+.container-texto{
+    background-color: transparent;
+    border-radius: 13px;
+    padding: 10px;
+    color:  #58586d;
+    border: 1px solid #F2F2F2;
+    font-weight: 600;
+    display: flex;
+    font-size: 12px;
+}
+
+.container-texto:hover {
+    cursor: pointer;
+}
+
+.campo-texto-placeholder {    
+    color:  #CCCCCC;
+    display: inline-block;
+    width: 100%;
+}
+
+.container-texto fa-icon{
+    font-size: 20px;
+    color:#58586d;
+    margin-left: 15px;
+}

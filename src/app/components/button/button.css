@@ -1,0 +1,25 @@
+button {
+    background-color: #F3BC08;
+    color: white;
+    border-radius: 10px;
+    padding: 13px 45px;
+    border: 0;
+    font-weight: 600;
+    text-align: center;
+    font-size: 12px;
+    opacity: 1;
+}
+
+button:hover{
+    cursor: pointer;
+}
+
+button:active {
+    background-color: #e6b30c;
+}
+
+button:disabled {
+    pointer-events: none;
+    opacity: 0.6;
+    cursor: inherit;
+}

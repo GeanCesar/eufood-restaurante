@@ -1,0 +1,40 @@
+.card-restaurante {
+    background-color: white;
+    border: 1px solid #f5f5f5;
+    display: inline-block;
+    text-align: center;
+    margin: 50px 15px;
+    border-radius: 10px 10px 10px 10px;
+    min-width: 180px;
+    padding: 0px;
+    box-shadow: 1px 3px 3px 1px #eff3fbcc;
+}
+
+.card-restaurante:hover {
+    cursor: pointer;
+}
+
+.card-restaurante:active {
+    box-shadow: inset 2px 2px 3px 3px #eff3fbcc;
+}
+
+.card-imagem {
+    padding: 20px;
+}
+
+.card-imagem img {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+}
+
+.card-nome {
+    color: white;
+    background-color: #6A33CA;
+    text-align: center;
+    padding: 7px 7px 7px 10px;
+    border-radius: 0px 0px 10px 10px;
+    font-size: 11px;
+    position: relative;
+    bottom: 0px;
+}

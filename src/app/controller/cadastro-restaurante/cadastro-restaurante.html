@@ -1,0 +1,18 @@
+<form>
+    <fieldset [disabled]="isDisabled()">
+        <h3>Cadastrar restaurante</h3>
+        <div class="area-campos">
+            <textfield [(ngModel)]="restaurante.nome" name="nome" ngDefaultControl id="campo-nome" texto="Nome Restaurante" [obrigatorio]=true placeholder="Digite o nome"></textfield>
+            <app-file-chooser texto="Imagem" textoPlaceholder="Selecione a imagem de perfil" #fileUpload></app-file-chooser>
+        </div>
+        
+        <div class="area-botao">
+            <app-button texto="Cadastrar" type="submit" (click)="!disableSubmit() && onSubmit()" [disabled]="disableSubmit()"></app-button>
+        </div>
+    </fieldset>
+</form>
+
+@if(progress()) {
+    <mat-progress-bar id="loading-bar" mode="indeterminate"></mat-progress-bar>
+}
+

@@ -1,0 +1,28 @@
+h3 {
+    color: #77757B;
+    margin-bottom: 20px;
+}
+
+.area-campos textfield{
+    display: inline-block;
+    margin-right: 20px;
+}
+
+.area-campos app-file-chooser{
+    display: inline-block;
+}
+
+.area-botao{
+    text-align: right;
+    margin-top: 20px
+}
+
+mat-progress-bar{
+    margin-top: 20px;
+}
+
+fieldset {
+    margin: 0;
+    padding: 0;
+    border: 0;
+}
