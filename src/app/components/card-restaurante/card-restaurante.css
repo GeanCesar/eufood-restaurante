@@ -20,6 +20,7 @@
 
 .card-imagem {
     padding: 20px;
+    margin-top: -5px;
 }
 
 .card-imagem img {
@@ -38,3 +39,18 @@
     position: relative;
     bottom: 0px;
 }
+
+.remover {
+    text-align: right;
+    padding: 5px;
+}
+
+.remover fa-icon {
+    color: #bebebe;
+    font-size: 18px;
+}
+
+.remover fa-icon:hover {
+    color:red;
+}
+

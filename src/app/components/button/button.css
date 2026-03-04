@@ -1,4 +1,4 @@
-button {
+.botao-primario {
     background-color: #F3BC08;
     color: white;
     border-radius: 10px;
@@ -10,11 +10,23 @@ button {
     opacity: 1;
 }
 
+.botao-secundario {
+    border: 1px solid #F3BC08;
+    background-color: transparent;    
+    color: #F3BC08;
+    border-radius: 10px;
+    padding: 13px 45px;
+    font-weight: 600;
+    text-align: center;
+    font-size: 12px;
+    opacity: 1;
+}
+
 button:hover{
     cursor: pointer;
 }
 
-button:active {
+.botao-primario:active {
     background-color: #e6b30c;
 }
 

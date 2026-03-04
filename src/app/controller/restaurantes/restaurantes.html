@@ -3,18 +3,22 @@
 <div class="container">
     <h3 class="titulo">Selecione o restaurante</h3>
     <div class="container-restaurantes">
-        <button class="bt-adicionar" (click)="modal.toggle();">
+        <button class="bt-adicionar" (click)="modal_cadastro.toggle();">
                 <fa-icon [icon]="faPlus"/>
         </button>
         @for (restaurante of restaurantes(); track $index) {
-            <app-card-restaurante [restaurante]="restaurante"></app-card-restaurante>
+            <app-card-restaurante [restaurante]="restaurante" [modal]="modal_deletar" [modalDeletarRestaurante]="app_modal_deletar_restaurante"></app-card-restaurante>
         }   
     </div>
 </div>
 
 <footer></footer>
 
-<app-modal #modal class="modal-cadastro">
-    <app-cadastro-restaurante #modal_cadastro></app-cadastro-restaurante>
+<app-modal #modal_cadastro class="modal-cadastro">
+    <app-cadastro-restaurante></app-cadastro-restaurante>
 </app-modal>
 
+
+<app-modal #modal_deletar class="modal-deletar">
+    <app-modal-deletar-restaurante #app_modal_deletar_restaurante [modal]="modal_deletar"></app-modal-deletar-restaurante>
+</app-modal>

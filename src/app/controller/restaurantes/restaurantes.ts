@@ -10,10 +10,11 @@ import { FaIconComponent } from "@fortawesome/angular-fontawesome";
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import { CadastroRestaurante } from "../cadastro-restaurante/cadastro-restaurante";
 import { Modal } from "../../components/modal/modal";
+import { ModalDeletarRestaurante } from "../modal-deletar-restaurante/modal-deletar-restaurante";
 
 @Component({
   selector: 'app-restaurantes',
-  imports: [CommonModule, CardRestaurante, Header, FaIconComponent, Footer, CadastroRestaurante, Modal],
+  imports: [CommonModule, CardRestaurante, Header, FaIconComponent, Footer, CadastroRestaurante, Modal, ModalDeletarRestaurante],
   templateUrl: './restaurantes.html',
   styleUrl: './restaurantes.css',
 })

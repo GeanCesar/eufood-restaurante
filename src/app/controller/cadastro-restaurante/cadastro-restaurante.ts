@@ -90,8 +90,8 @@ export class CadastroRestaurante {
       });      
     }    
   }
-  
 
+  
   disableSubmit() {
     let disabled = true;
     if (this.restaurante?.nome) {
