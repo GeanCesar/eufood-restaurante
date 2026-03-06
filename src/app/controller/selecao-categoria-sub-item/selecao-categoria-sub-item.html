@@ -1,0 +1,42 @@
+<div class="container-selecao">
+
+  <h3 class="titulo">Categoria subitens</h3>
+
+  <div class="area-adicao-categoria" (click)="adicionaNovo()">
+    <h3>+ Adicionar nova categoria</h3>
+  </div>
+
+  <div cdkDropList class="categoria-list" (cdkDropListDropped)="drop($event)">
+    @for (categoria of categorias; track categoria) {
+      <div (dblclick)="iniciaEdicao(categoria)" class="categoria-box" cdkDrag>
+
+        @if(!categoria.editando) {
+          <label>{{ categoria.nome }} </label>
+        } @else {
+          <textfield [(ngModel)]=categoria.nome
+             name="categoria" ngDefaultControl
+             placeholder="Digite o nome da categoria"
+             id="campo-categoria"  value="Teste" valor="{{categoria.nome}}"
+             (focusout)="finalizaEdicao(categoria)" (keyup.enter)="finalizaEdicao(categoria)"/>
+        }
+        
+        <fa-icon [icon]="faGrip"></fa-icon>
+      </div>
+    }
+  </div>
+
+  <div class="area-botoes">
+    <app-datalist [itens]=getCategorias()></app-datalist>
+
+    <app-button texto="Voltar" [primario]=false></app-button>
+    <app-button texto="Avançar" [primario]=true></app-button>
+  </div>
+
+  <div class="area-pages">
+    <fa-icon [icon]="faCircle"></fa-icon>
+    <fa-icon class="ativo" [icon]="faCircle"></fa-icon>
+    <fa-icon [icon]="faCircle"></fa-icon>
+  </div>
+
+</div>
+

@@ -1,0 +1,37 @@
+<div class="container-selecao">
+
+  <h3 class="titulo">Cadastro de item</h3>
+
+  <div class="area-campos"> 
+
+    <div class="col-md-12">
+        <textfield class="col-md-8" [(ngModel)]="item.nome" name="nome" ngDefaultControl id="campo-nome" valor="" placeholder="Digite o nome do item" />    
+        <textfield class="col-md-4" [(ngModel)]="item.valor" name="preco" ngDefaultControl mascara="0,00" id="campo-preco" valor="" placeholder="R$ 0,00" />
+    </div>    
+    
+    <textfield class="col-md-12" [(ngModel)]="item.descricao" name="descricao" ngDefaultControl id="campo-descricao" valor="" placeholder="Digite a descrição do item" />
+
+    <div class="col-md-12 container-campos">
+        <div class="col-md-3">
+            <app-checkbox texto="Subitem?"></app-checkbox>
+        </div>
+
+        <div class="col-md-9">
+            <app-datalist placeholder="Selecione a categoria" [(ngModel)]="item.categoria" [itens]=getCategorias()></app-datalist>
+        </div>
+    </div>    
+  </div>
+
+  
+  <div class="area-botoes">    
+    <app-button texto="Avançar" [primario]=true></app-button>
+  </div>
+
+  <div class="area-pages">
+    <fa-icon class="ativo" [icon]="faCircle"></fa-icon>
+    <fa-icon [icon]="faCircle"></fa-icon>
+    <fa-icon [icon]="faCircle"></fa-icon>
+  </div>
+
+</div>
+

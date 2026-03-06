@@ -4,8 +4,9 @@
     display: inline-block;
     text-align: center;
     margin: 50px 15px;
+    margin-top: 30px;
     border-radius: 10px 10px 10px 10px;
-    min-width: 180px;
+    min-width: 170px;
     padding: 0px;
     box-shadow: 1px 3px 3px 1px #eff3fbcc;
 }
@@ -33,11 +34,15 @@
     color: white;
     background-color: #6A33CA;
     text-align: center;
-    padding: 7px 7px 7px 10px;
+    padding: 7px 20px 7px 20px;
     border-radius: 0px 0px 10px 10px;
-    font-size: 11px;
     position: relative;
     bottom: 0px;
+}
+
+.card-nome p{        
+    font-size: 14px;
+    margin: 0;
 }
 
 .remover {

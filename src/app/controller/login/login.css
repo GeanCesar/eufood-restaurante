@@ -34,10 +34,11 @@
     border-radius: 10px 10px 0 0;
 }
 
-.area-message h3 {
+.area-message p {
     font-size: 15px;
     color: white;
     padding-right: 50px;
+    font-weight: bold;
 }
 
 .container-login .area-campos{

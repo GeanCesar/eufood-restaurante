@@ -3,10 +3,13 @@
 <label for="campo-texto" class="texto-textfield">{{texto}}</label>
 <div class="container-texto" (click)="fileInput.click()">
 
-    @if(!nomeArquivo()) {
-        <p class="campo-texto-placeholder">{{textoPlaceholder}}</p>
-    } @else{
-        <p class="campo-texto" id="campo-texto">{{nomeArquivo()}}</p>   
-    }
+    <div>
+        @if(!nomeArquivo()) {
+            <p class="campo-texto-placeholder">{{textoPlaceholder}}</p>
+        } @else{
+            <p class="campo-texto" id="campo-texto">{{nomeArquivo()}}</p>   
+        }
+    </div>
+    
     <fa-icon [icon]="faUpload"></fa-icon>
 </div>

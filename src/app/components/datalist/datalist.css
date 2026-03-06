@@ -1,0 +1,14 @@
+.campo {
+    background-color: transparent;
+    border-radius: 13px;
+    padding: 10px;
+    color:  #58586d;
+    border: 1px solid #F2F2F2;
+    font-weight: 600;
+    display: block;
+    font-size: 12px;
+}
+
+input {
+    width: 100%;
+}

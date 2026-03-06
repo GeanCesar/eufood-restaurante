@@ -1,0 +1,62 @@
+.area-campos textfield {
+    display: inline-block;
+}
+
+.area-campos .col-md-12{
+    margin-top: 10px;
+}
+
+.col-md-4 {
+    padding-left: 10px;
+}
+
+.container-selecao {
+    background-color: white;
+    display: inline-block;
+    padding: 30px;
+    border-radius: 10px;
+    margin-top: 10px;
+    margin-left: 10px;
+    width: 600px;
+}
+
+.container-campos div {
+    display: inline-block;
+}
+
+.titulo {
+    margin-bottom: 20px;
+    color: #3E374B;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.area-botoes {
+    text-align: right;
+    margin-top: 20px;
+}
+
+.area-botoes app-button:first-child {
+    margin-right: 10px;
+}
+
+.area-pages {
+    text-align: center;
+    margin-top: 20px;
+    margin-bottom: -10px;
+}
+
+.area-pages fa-icon{
+    color: #D9D9D9;    
+    margin-right: 3px;
+    margin-left: 3px;
+    font-size: 10px;
+}
+
+.area-pages .ativo{
+    color: #F3BC08;
+}
+
+fa-icon {
+    color: #C4C1C1;
+}

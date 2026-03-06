@@ -1,0 +1,8 @@
+<input  class="campo" list="id-car" [(ngModel)]="itemSelecionado" placeholder="{{placeholder}}" />
+<datalist id="id-car">      
+    @for (item of itens; track $index) {
+        <option [value]="item.texto">
+            {{ item.texto }}
+        </option>
+    }      
+</datalist>

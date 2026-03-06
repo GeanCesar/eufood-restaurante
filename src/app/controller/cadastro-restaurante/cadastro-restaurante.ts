@@ -1,4 +1,4 @@
-import { Component, OnInit, signal, ViewChild } from '@angular/core';
+import { Component, signal, ViewChild } from '@angular/core';
 import { MatProgressBar } from "@angular/material/progress-bar";
 import { Button } from "../../components/button/button";
 import { FileChooser } from "../../components/file-chooser/file-chooser";

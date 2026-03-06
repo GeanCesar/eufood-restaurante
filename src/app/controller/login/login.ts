@@ -11,10 +11,11 @@ import { Usuario } from '../../model/usuario';
 import { RespostaRequisicao } from '../../model/respostaRequisicao';
 import { tap } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
+import { CadastroItemCardapio } from "../cadastro-item-cardapio/cadastro-item-cardapio";
 
 @Component({
   selector: 'app-login',
-  imports: [Footer, Textfield, Button, Logo, FormsModule, MatProgressBarModule],
+  imports: [Footer, Textfield, Button, Logo, FormsModule, MatProgressBarModule, CadastroItemCardapio],
   templateUrl: './login.html',
   styleUrl: './login.css',
 })

@@ -10,18 +10,19 @@
     width: 100%;
 }
 
-.footer h3 {
+.footer p {
     display: inline;
     margin-left: 30px;
     color: white;
     font-weight: normal;
+    font-size: 14px;
 }
 
 .footer a {
     text-decoration: none;
 }
 
-.footer h3 fa-icon {
+.footer p fa-icon {
     color: white;
-    font-size: 20px;
+    font-size: 20px!important;
 }
