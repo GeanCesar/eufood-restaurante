@@ -1,3 +1,7 @@
+html {
+    height: 100%!important;
+}
+
 .container-login{
     width: 700px;
     height: 170px;
@@ -39,6 +43,7 @@
     color: white;
     padding-right: 50px;
     font-weight: bold;
+    margin-bottom: 0;
 }
 
 .container-login .area-campos{

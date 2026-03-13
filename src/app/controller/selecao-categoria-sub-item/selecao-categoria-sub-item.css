@@ -30,9 +30,11 @@
     border-radius: 10px;
 }
 
-.area-adicao-categoria h3 {
+.area-adicao-categoria p {
     text-align: center;
     width: 100%;
+    font-weight: bold;
+    margin-bottom: 0;
 }
 
 .categoria-list {
@@ -66,30 +68,16 @@
   padding-right: 20px;
 }
 
-.area-botoes {
-    text-align: right;
-    margin-top: 20px;
+.categoria-box label{
+  width: 100%;
+  margin-left: 10px;
+  margin-right: 10px;
 }
 
-.area-botoes app-button:first-child {
-    margin-right: 10px;
-}
-
-.area-pages {
-    text-align: center;
-    margin-top: 20px;
-    margin-bottom: -10px;
-}
-
-.area-pages fa-icon{
-    color: #D9D9D9;    
-    margin-right: 3px;
-    margin-left: 3px;
-    font-size: 10px;
-}
-
-.area-pages .ativo{
-    color: #F3BC08;
+.categoria-box textfield{
+  width: 100%;
+  margin-left: 10px;
+  margin-right: 10px;
 }
 
 .cdk-drag-preview {
@@ -114,4 +102,14 @@
 
 fa-icon {
     color: #C4C1C1;
+}
+
+.container-remover fa-icon {
+    color: #bebebe;
+    font-size: 16px;
+}
+
+.container-remover fa-icon:hover {
+    color:red;
+    cursor: pointer;
 }

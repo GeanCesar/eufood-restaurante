@@ -1,0 +1,5 @@
+<div class="item-box">
+    <img draggable="false" [src]="!item.imagemCarregada ? '/imgs/no-img.png' : item.imagemBaixada">
+    <label class="nome-item">{{ item.nome}} </label>
+    <label class="preco-item">R$ {{ item.valor | numberFormat }}</label>
+</div>

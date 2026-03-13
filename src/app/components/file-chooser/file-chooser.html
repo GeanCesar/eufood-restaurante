@@ -1,6 +1,9 @@
 <input (change)="onChange($event)" #fileInput type="file" hidden (change)="nomeArquivo.set(fileInput.value)">
 
-<label for="campo-texto" class="texto-textfield">{{texto}}</label>
+@if(texto) {
+    <label for="campo-texto" class="texto-textfield">{{texto}}</label>
+}
+
 <div class="container-texto" (click)="fileInput.click()">
 
     <div>

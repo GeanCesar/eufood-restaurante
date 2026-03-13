@@ -1,8 +1,20 @@
-export class CategoriaSubItem {
-    nome? : string;
-    editando ? : boolean = false;
+import { ItemCardapio } from "./item-cardapio";
+import { SubItemCardapioRest } from "./rest/sub-item-cardapio-rest";
 
-    constructor(nome : string) {
-        this.nome = nome;
+export class CategoriaSubItem {
+
+    descricao ? : string;
+    ordem ? : number;
+    quantidadeMinima? : number;
+    quantidadeMaxima? : number;
+    uuid ? : string;
+    uuidRestaurante ? : string;
+
+    editando ? : boolean = false;
+    itensAdicionados : SubItemCardapioRest[] = [];
+    acordionAtivo = false;
+    
+    constructor(descricao : string) {
+        this.descricao = descricao;
     }
 }

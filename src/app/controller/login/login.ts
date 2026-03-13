@@ -8,14 +8,13 @@ import { Textfield } from '../../components/textfield/textfield';
 import { Button } from '../../components/button/button';
 import { Logo } from '../../components/logo/logo';
 import { Usuario } from '../../model/usuario';
-import { RespostaRequisicao } from '../../model/respostaRequisicao';
 import { tap } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
-import { CadastroItemCardapio } from "../cadastro-item-cardapio/cadastro-item-cardapio";
+import { RespostaRequisicao } from '../../model/rest/resposta-requisicao';
 
 @Component({
   selector: 'app-login',
-  imports: [Footer, Textfield, Button, Logo, FormsModule, MatProgressBarModule, CadastroItemCardapio],
+  imports: [Footer, Textfield, Button, Logo, FormsModule, MatProgressBarModule],
   templateUrl: './login.html',
   styleUrl: './login.css',
 })

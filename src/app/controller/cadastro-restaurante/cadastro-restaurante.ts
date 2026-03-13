@@ -5,9 +5,9 @@ import { FileChooser } from "../../components/file-chooser/file-chooser";
 import { Textfield } from "../../components/textfield/textfield";
 import { FormsModule } from '@angular/forms';
 import { HttpClient, HttpEvent, HttpEventType, HttpHeaders } from '@angular/common/http';
-import { RespostaRequisicao } from '../../model/respostaRequisicao';
 import { Restaurante } from '../../model/restaurante';
 import { ActivatedRoute, Route, Router } from '@angular/router';
+import { RespostaRequisicao } from '../../model/rest/resposta-requisicao';
 
 @Component({
   selector: 'app-cadastro-restaurante',

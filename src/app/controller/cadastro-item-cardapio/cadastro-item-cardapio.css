@@ -6,8 +6,12 @@
     margin-top: 10px;
 }
 
-.col-md-4 {
+.col-md-3 {
     padding-left: 10px;
+}
+
+.container {
+    text-align: center;
 }
 
 .container-selecao {
@@ -17,7 +21,21 @@
     border-radius: 10px;
     margin-top: 10px;
     margin-left: 10px;
-    width: 600px;
+    min-width: 600px;
+    text-align: left;
+}
+
+.container-imagem {
+    display: flex;
+}
+
+.container-imagem app-file-chooser{    
+    width: calc(100% - 70px);
+}
+
+.container-imagem img {
+    width: 55px;
+    margin-left: 15px;
 }
 
 .container-campos div {
@@ -31,32 +49,16 @@
     font-weight: bold;
 }
 
-.area-botoes {
+.area-subitem{
+    margin-top: 20px;
+    margin-bottom: 30px;
+}
+
+.area-botoes{
     text-align: right;
     margin-top: 20px;
 }
 
 .area-botoes app-button:first-child {
     margin-right: 10px;
-}
-
-.area-pages {
-    text-align: center;
-    margin-top: 20px;
-    margin-bottom: -10px;
-}
-
-.area-pages fa-icon{
-    color: #D9D9D9;    
-    margin-right: 3px;
-    margin-left: 3px;
-    font-size: 10px;
-}
-
-.area-pages .ativo{
-    color: #F3BC08;
-}
-
-fa-icon {
-    color: #C4C1C1;
 }

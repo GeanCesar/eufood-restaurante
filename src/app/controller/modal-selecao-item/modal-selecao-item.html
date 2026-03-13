@@ -1,0 +1,9 @@
+<h3>Novo subitem</h3>
+
+<div class="area-campos">
+    <app-datalist #data_list [(ngModel)]="itemSelecionado" ngDefaultControl placeholder="Selecione o item" [itens]=itens() (onSeleciona)="alteraItem($event)"></app-datalist>
+</div>
+
+<div class="area-botao">    
+    <app-button texto="Concluir" type="submit" (click)="onConcluir()" [primario]="true"></app-button>
+</div>

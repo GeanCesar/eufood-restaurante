@@ -7,7 +7,7 @@
                 <fa-icon [icon]="faPlus"/>
         </button>
         @for (restaurante of restaurantes(); track $index) {
-            <app-card-restaurante [restaurante]="restaurante" [modal]="modal_deletar" [modalDeletarRestaurante]="app_modal_deletar_restaurante"></app-card-restaurante>
+            <app-card-restaurante (click)="adicionarItem(restaurante)" [restaurante]="restaurante" [modal]="modal_deletar" [modalDeletarRestaurante]="app_modal_deletar_restaurante"></app-card-restaurante>
         }   
     </div>
 </div>
@@ -20,5 +20,5 @@
 
 
 <app-modal #modal_deletar class="modal-deletar">
-    <app-modal-deletar-restaurante #app_modal_deletar_restaurante [modal]="modal_deletar"></app-modal-deletar-restaurante>
+    <app-modal-sim-nao #app_modal_deletar_restaurante [modal]="modal_deletar"></app-modal-sim-nao>
 </app-modal>

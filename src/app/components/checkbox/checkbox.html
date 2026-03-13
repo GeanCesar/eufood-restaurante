@@ -1,2 +1,9 @@
-<input id="checkbox" type="checkbox" [checked]="selecionado" name="checkbox">
+<input 
+    #checkbox
+    id="checkbox"
+    type="checkbox"
+    [checked]="selecionado"
+    (change)="mudouEstado(checkbox.checked)"
+    name="checkbox"
+    ngDefaultControl>
 <label for="checkbox"> {{texto}} </label>

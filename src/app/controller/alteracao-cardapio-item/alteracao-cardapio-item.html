@@ -1,0 +1,41 @@
+<app-header></app-header>
+
+<div class="container-conteudo">
+    <div class="container"> 
+
+        @if(carregando()) {
+            <p>Carregando...</p>
+            <mat-progress-bar mode="query"></mat-progress-bar>
+        } @else {
+            <div class="right">
+                <app-button texto="Cadastrar item" (click)="cadastrarItem()"></app-button>
+            </div>
+
+            @for (categoria of categorias(); track $index) {
+                @if(categoria.itensAdicionados.length > 0) {
+                    <div class="container-categoria">
+                        <p class="nome-categoria">{{categoria.descricao}}</p>
+                        <div cdkDropList (cdkDropListDropped)="drop( categoria , $event)">
+                            @for (item of categoria.itensAdicionados; track $index) {                    
+                                <div class="item-box" cdkDrag>
+                                    <app-card-item-cardapio [modal]="modal_deletar" [modalDeletarItem]="app_modal_deletar_item" [item]="item"></app-card-item-cardapio>
+                                </div>                    
+                            }
+                        </div>
+                    
+                    </div>
+                }
+                
+            }  
+        }
+
+        
+    </div>
+</div>
+
+
+<app-modal #modal_deletar class="modal-deletar">
+    <app-modal-sim-nao #app_modal_deletar_item [modal]="modal_deletar" mensagem="Deseja remover o item selecionado?"></app-modal-sim-nao>
+</app-modal>
+
+<footer></footer>

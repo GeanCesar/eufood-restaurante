@@ -4,7 +4,7 @@
     }
 
     <div class="fundo-textfield-pass">
-        <input id="campo-senha" #campo_senha class="campo-textfield-pass" autocomplete="on" placeholder="{{placeholder}}" value="{{valor}}" type="password">
+        <input id="campo-senha" #campo_senha (focusout)="focusOut()" class="campo-textfield-pass" autocomplete="on" placeholder="{{placeholder}}" value="{{valor}}" type="password">
         <img id="eye-icon" (mousedown)="changeInput(campo_senha)" (mouseup)="changeInput(campo_senha)" src="imgs/eye.png">
     </div>
 } @else {
@@ -14,10 +14,10 @@
     }
     
     @if(mascara) {
-        <input type="text" id="campo-textfield" class="campo-textfield" mask="{{mascara}}" placeholder="{{placeholder}}" value="{{valor}}" >
-    }@else { 
-        <input type="text" id="campo-textfield" class="campo-textfield" placeholder="{{placeholder}}" value="{{valor}}" >
+        <input type="text" (focusout)="focusOut()" id="campo-textfield" class="campo-textfield" mask="{{mascara}}" placeholder="{{placeholder}}" value="{{valor}}" >
+    } @else if (monetario){
+        <input [(ngModel)]="valor" value="{{valor}}" appCurrencyI18n type="text" (focusout)="focusOut()" id="campo-textfield" class="campo-textfield" placeholder="{{placeholder}}" #input >
+    } @else {         
+        <input type="text" (focusout)="focusOut()" id="campo-textfield" class="campo-textfield" placeholder="{{placeholder}}" value="{{valor}}" >
     }
-
-    
 }

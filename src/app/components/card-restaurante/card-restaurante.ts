@@ -6,8 +6,8 @@ import { HttpHeaders, HttpClient, HttpParams } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Modal } from "../modal/modal";
-import { ICardRestauranteListener } from '../../model/listeners/card-restaurante-listener';
-import { ModalDeletarRestaurante } from '../../controller/modal-deletar-restaurante/modal-deletar-restaurante';
+import { IModalSimNaoListener } from '../../model/listeners/modal-sim-nao-listener';
+import { ModalSimNao } from '../../controller/modal-sim-nao/modal-sim-nao';
 
 @Component({
   selector: 'app-card-restaurante',
@@ -16,19 +16,19 @@ import { ModalDeletarRestaurante } from '../../controller/modal-deletar-restaura
   styleUrl: './card-restaurante.css',
 })
 
-export class CardRestaurante implements ICardRestauranteListener {
+export class CardRestaurante implements IModalSimNaoListener {
 
   @Input() restaurante? : Restaurante;
 
   @Input() modal ? : Modal;
-  @Input() modalDeletarRestaurante ? : ModalDeletarRestaurante;
+  @Input() modalDeletarRestaurante ? : ModalSimNao;
 
   faTimes = faCircleXmark;
   
   constructor(private http:HttpClient, private router : Router, private  route : ActivatedRoute) {}
 
   onSim(): void {    
-      this.removerRestaurante();
+    this.removerRestaurante();
   }
 
   mostraModal(){

@@ -1,12 +1,14 @@
+@import "../node_modules/@ng-select/ng-select/themes/default.theme.css";
+
 body {
     margin: 0;
     background-color: #f7f7f7!important;
-    height: 100%;
+    min-height: 100%;
 }
 
 html {
-    height: 100%;
-    background-color: #EAEAEA;
+    height: 100%!important;
+    background-color: #f7f7f7;
 }
 
 * {
@@ -20,3 +22,30 @@ p {
 
 textarea, input { outline: none; }
 
+.mat-horizontal-stepper-header-container {
+    display: none!important;
+}
+
+.ng-select-container{
+    border: 0!important;
+}
+
+.mat-horizontal-content-container {
+    overflow-y: visible!important;
+}
+
+.ng-select-container{
+    background-color: transparent!important;
+}
+
+hr {
+    border-color: #c0c0c0!important;
+}
+
+.right {
+    text-align: right;
+}
+
+.container-conteudo{
+    min-height: calc(100% - 203px);
+}

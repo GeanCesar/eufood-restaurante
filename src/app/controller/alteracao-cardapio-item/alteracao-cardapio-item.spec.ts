@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ModalDeletarRestaurante } from './modal-deletar-restaurante';
+import { AlteracaoCardapioItem } from './alteracao-cardapio-item';
 
-describe('ModalDeletarRestaurante', () => {
-  let component: ModalDeletarRestaurante;
-  let fixture: ComponentFixture<ModalDeletarRestaurante>;
+describe('AlteracaoCardapioItem', () => {
+  let component: AlteracaoCardapioItem;
+  let fixture: ComponentFixture<AlteracaoCardapioItem>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ModalDeletarRestaurante]
+      imports: [AlteracaoCardapioItem]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(ModalDeletarRestaurante);
+    fixture = TestBed.createComponent(AlteracaoCardapioItem);
     component = fixture.componentInstance;
     await fixture.whenStable();
   });

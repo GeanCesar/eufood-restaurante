@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { firstValueFrom, lastValueFrom, timeout } from 'rxjs';
-import { RespostaRequisicao } from '../model/respostaRequisicao';
+import { lastValueFrom, timeout } from 'rxjs';
+import { RespostaRequisicao } from '../model/rest/resposta-requisicao';
 
 @Injectable({providedIn: 'root'})
 export class TokenService {

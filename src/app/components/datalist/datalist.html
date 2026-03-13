@@ -1,8 +1,12 @@
-<input  class="campo" list="id-car" [(ngModel)]="itemSelecionado" placeholder="{{placeholder}}" />
-<datalist id="id-car">      
+<ng-select #select
+     class="campo"
+     [(ngModel)]="itemSelecionado"
+     (change)="seleciona(itemSelecionado)"
+     ngDefaultControl
+     placeholder="{{placeholder}}"
+     [addTag]="adicionaItem"
+     addTagText="Adicione um item">
     @for (item of itens; track $index) {
-        <option [value]="item.texto">
-            {{ item.texto }}
-        </option>
-    }      
-</datalist>
+        <ng-option [value]="item.objeto">{{item.texto}}</ng-option>
+    }
+</ng-select>

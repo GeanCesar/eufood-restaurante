@@ -24,4 +24,8 @@ export class Header {
     this.router.navigate(['/controller/login'], { relativeTo: this.route });
   }
 
+  selecaoRestaurante() {
+    this.router.navigate(['controller/restaurantes']);
+  }
+
 }

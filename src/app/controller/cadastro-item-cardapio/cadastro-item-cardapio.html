@@ -1,37 +1,45 @@
-<div class="container-selecao">
+<app-header></app-header>
 
-  <h3 class="titulo">Cadastro de item</h3>
+<div class="container-conteudo">
+    <div class="container">
+        <div class="container-selecao">
+            <h3 class="titulo">{{uuidItemAlteracao ? 'Alteração de item': 'Cadastro de item'}} </h3>
+            <div class="area-campos"> 
+                <div class="col-md-12">
+                    <textfield required="true" [(ngModel)]="item().nome" class="col-md-9" name="nome" id="campo-nome" valor="{{item().nome}}" placeholder="Digite o nome do item" ngDefaultControl />    
+                    <textfield [(ngModel)]="item().valor" [monetario]="true" class="col-md-3" name="preco" #preco id="campo-preco" valor="{{item().valor}}" placeholder="R$ 0,00" ngDefaultControl/>                
+                </div>    
+                
+                <textfield [(ngModel)]="item().descricao" class="col-md-12" name="descricao" ngDefaultControl id="campo-descricao" valor="{{item().descricao}}" placeholder="Digite a descrição do item" />
 
-  <div class="area-campos"> 
+                <div class="col-md-12 container-imagem">        
+                    <app-file-chooser [(ngModel)]="item().imagemBaixada" name="fileUpload" ngDefaultControl class="col-md-12" textoPlaceholder="Selecione a imagem do item" #fileUpload (onChangeFile)="onSeleciona($event)"></app-file-chooser>        
+                    <img [src]="item().imagemBaixada">
+                </div>
 
-    <div class="col-md-12">
-        <textfield class="col-md-8" [(ngModel)]="item.nome" name="nome" ngDefaultControl id="campo-nome" valor="" placeholder="Digite o nome do item" />    
-        <textfield class="col-md-4" [(ngModel)]="item.valor" name="preco" ngDefaultControl mascara="0,00" id="campo-preco" valor="" placeholder="R$ 0,00" />
-    </div>    
-    
-    <textfield class="col-md-12" [(ngModel)]="item.descricao" name="descricao" ngDefaultControl id="campo-descricao" valor="" placeholder="Digite a descrição do item" />
+                <div class="col-md-12 container-campos">
+                    <div class="col-md-3">
+                        <app-checkbox [(ngModel)]="item().tipoItem" name="chkSubitem" (eventCheck)="checkEvent($event)" texto="Subitem?" ngDefaultControl></app-checkbox>
+                    </div>
 
-    <div class="col-md-12 container-campos">
-        <div class="col-md-3">
-            <app-checkbox texto="Subitem?"></app-checkbox>
+                    <div class="col-md-9">
+                        <app-datalist name="selectCategoria" placeholder="Selecione a categoria" (onSeleciona)="alteraCategoria($event)" [adicionaItem]=true  [itens]=getCategorias() ngDefaultControl></app-datalist>
+                    </div>
+                </div>
+
+                <div class="area-subitem">
+                    <app-button [primario]="false" texto="Alterar subitens" (click)="alterarSubitens()"/>
+                </div>
+                <hr>            
+            </div>
+
+            <div class="area-botoes">
+                <app-button [primario]="false" (click)="voltar()" texto="Fechar"/>
+                <app-button type="submit" (click)="enviar()" texto="Salvar"/>
+            </div>
         </div>
-
-        <div class="col-md-9">
-            <app-datalist placeholder="Selecione a categoria" [(ngModel)]="item.categoria" [itens]=getCategorias()></app-datalist>
-        </div>
-    </div>    
-  </div>
-
-  
-  <div class="area-botoes">    
-    <app-button texto="Avançar" [primario]=true></app-button>
-  </div>
-
-  <div class="area-pages">
-    <fa-icon class="ativo" [icon]="faCircle"></fa-icon>
-    <fa-icon [icon]="faCircle"></fa-icon>
-    <fa-icon [icon]="faCircle"></fa-icon>
-  </div>
-
+    </div>
 </div>
 
+
+<footer></footer>

@@ -1,0 +1,36 @@
+<div class="container-card-item">
+
+    <div class="area-botoes">
+        <fa-icon (click)="alterarItem()" [icon]="faPen"></fa-icon>
+        <fa-icon (click)="mostraModal()" [icon]="faTimes"></fa-icon>
+    </div>
+    <div class="area-info-item">
+        <div>
+            <img [src]="!item?.imagemCarregada ? '/imgs/no-img.png' : item?.imagemBaixada">
+        </div>        
+        <div class="area-cabelho-item">
+            <div class="cabecalho-item">
+                <p class="titulo-item">{{item?.nome}}</p>
+                <p class="preco-item">R$ {{item?.valor | numberFormat}}</p>
+            </div>
+            <div class="area-descricao">
+                <p>{{item?.descricao}}</p>
+            </div>
+        </div>        
+    </div>
+
+    <div class="sub-itens">        
+        @for(categoria of item?.categoriaSubItens; track $index) {            
+            @if(categoria.itens && categoria.itens.length > 0) {
+                <div>
+                    <button class="accordion" (click)="toggleAccordian($event, $index)"> {{categoria.descricao}} </button>
+                    <div class="panel" hide="!item.isActive">
+                        @for(item of categoria.itens; track $index) {
+                            <app-card-subitem-cardapio [item]="item"></app-card-subitem-cardapio>
+                        }
+                    </div>
+                </div>
+            }
+        }            
+    </div>
+</div>

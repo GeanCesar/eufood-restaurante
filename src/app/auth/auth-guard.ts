@@ -1,7 +1,7 @@
 import { inject, Injectable } from '@angular/core';
 import { ActivatedRoute, ActivatedRouteSnapshot, CanActivate, GuardResult, MaybeAsync, Router, RouterStateSnapshot } from '@angular/router';
 import { TokenService } from './token.service';
-import { RespostaRequisicao } from '../model/respostaRequisicao';
+import { RespostaRequisicao } from '../model/rest/resposta-requisicao';
 
 
 @Injectable({providedIn: 'root'})

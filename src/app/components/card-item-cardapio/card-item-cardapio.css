@@ -1,0 +1,117 @@
+.container-card-item{
+    border-radius: 10px;
+    background-color: white;
+    padding: 20px;
+    margin-bottom: 10px;
+}
+
+.area-botoes {
+    text-align: right;
+    margin-bottom: 10px;
+    margin-top: -10px;
+}
+
+.area-botoes fa-icon {
+    font-size: 20px;
+    margin-left: 5px;
+    color: #E5E5E5;
+}
+
+.area-botoes fa-icon:first-child:hover {
+    color: #6A33CA;
+}
+
+.area-botoes fa-icon:hover {
+    color:red;
+    cursor: pointer;
+}
+
+.area-info-item {
+    display: flex;
+}
+
+.area-info-item img {
+    width: 100px;
+    margin-right: 20px;
+}
+
+.area-cabelho-item {
+    padding: 0 20px 0px 20px;
+    width: 100%;
+}
+
+.cabecalho-item {
+    display: inline-flex;
+    width: 100%;
+}
+
+.cabecalho-item p {
+    display: inline-block;
+    color: #6A33CA;
+    font-weight: bold;
+    margin-bottom: 7px;
+}
+
+.titulo-item {
+    width: 100%;
+}
+
+.preco-item {
+    width: 100%;
+    text-align: right;
+}
+
+.area-descricao {
+    font-size: 13px;
+    font-weight: 300;
+}
+
+.area-descricao p {
+    margin-bottom: 0;
+}
+
+.sub-itens {
+    margin-top: 20px;
+}
+
+/* Acordion */
+
+.accordion {
+    background-color: transparent;
+    color:  #3E374B;
+    cursor: pointer;
+    padding: 10px;
+    width: 100%;
+    border: none;
+    text-align: left;
+    outline: none;
+    font-size: 12px;
+    font-weight: bold;
+    transition: 0.2s;
+    border: 1px solid #f5f5f5;
+    border-radius: 10px;
+}
+
+.active, .accordion:hover {
+    background-color: #f7f7f7;
+}
+
+.accordion:after {
+    content: '\002B';
+    color: #3E374B;
+    font-weight: bold;
+    float: right;
+    margin-left: 5px;
+}
+
+.active:after {
+    content: "\2212";
+}
+
+.panel {
+    padding: 0 18px;
+    background-color: white;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.2s ease-out;
+}

@@ -1,0 +1,51 @@
+<app-header></app-header>
+
+<div class="container-conteudo">
+  
+<div class="container">
+  <div class="container-selecao">
+      <h3 class="titulo">Sub itens</h3>
+
+      <div class="area-categoria" >    
+        <app-datalist #select [(ngModel)]="categoriaSelecionada" name="selectCategoria" ngDefaultControl placeholder="Selecione a categoria" [itens]=getCategorias() (onSeleciona)="alterarCategoria($event)"></app-datalist>
+      </div>
+
+      @if(categoriaSelecionada().descricao) {
+        <div class="area-adicao-item" (click)="mostraModal()">
+          <p>+ Adicionar novo subitem</p>
+        </div>
+
+        <div class="campos-categoria">
+          <label>De:</label>
+          <textfield name="txt-qtd-minima" [(ngModel)]="categoriaSelecionada().quantidadeMinima" ngDefaultControl valor={{categoriaSelecionada().quantidadeMinima}}  placeholder="Min." (onFocusOut)="atualizaCategoria()"></textfield>
+
+          <label>até:</label>
+          <textfield name="txt-qtd-maxima" [(ngModel)]="categoriaSelecionada().quantidadeMaxima" ngDefaultControl valor={{categoriaSelecionada().quantidadeMaxima}}  placeholder="Max." (onFocusOut)="atualizaCategoria()"></textfield>
+        </div>
+
+        <div cdkDropList class="item-list" (cdkDropListDropped)="drop($event)">
+          @for (item of subItensSelecionados(); track item) {
+            <div class="item-box" cdkDrag>        
+              <div class="container-remover">
+                  <fa-icon (click)="remover(item)" [icon]="faTimes"></fa-icon>
+              </div>
+
+              <img draggable="false" [src]="!item?.imagemCarregada ? '/imgs/no-img.png' : item?.imagemBaixada">
+              <label class="nome-item">{{ item.nome}} </label>
+              <label class="preco-item">R$ {{ item.valor | numberFormat }}</label>
+              <fa-icon [icon]="faGrip"></fa-icon>
+            </div>
+          }
+        </div>
+      }  
+    </div>
+  </div>
+
+</div>
+
+
+<app-modal #modal class="modal-subitem">
+    <app-modal-selecao-item #modal_selecao_subitem [modal]="modal"></app-modal-selecao-item>
+</app-modal>
+
+<footer></footer>

@@ -1,19 +1,20 @@
 import { Component, Input } from '@angular/core';
 import { Button } from "../../components/button/button";
 import { Modal } from '../../components/modal/modal';
-import { ICardRestauranteListener } from '../../model/listeners/card-restaurante-listener';
+import { IModalSimNaoListener } from '../../model/listeners/modal-sim-nao-listener';
 
 @Component({
-  selector: 'app-modal-deletar-restaurante',
+  selector: 'app-modal-sim-nao',
   imports: [Button],
-  templateUrl: './modal-deletar-restaurante.html',
-  styleUrl: './modal-deletar-restaurante.css',
+  templateUrl: './modal-sim-nao.html',
+  styleUrl: './modal-sim-nao.css',
 })
-export class ModalDeletarRestaurante {
+export class ModalSimNao {
 
   @Input() modal? : Modal;
+  @Input() mensagem ? : string;
 
-  listener? : ICardRestauranteListener;
+  listener? : IModalSimNaoListener;
 
   protected acaoNegativa() {
     this.modal?.toggle();
@@ -26,7 +27,7 @@ export class ModalDeletarRestaurante {
     }
   }
 
-  public setListener(listener : ICardRestauranteListener){
+  public setListener(listener : IModalSimNaoListener){
     this.listener = listener;
   }
 
