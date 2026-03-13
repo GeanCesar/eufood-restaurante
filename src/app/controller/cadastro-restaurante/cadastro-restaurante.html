@@ -1,6 +1,6 @@
 <form>
     <fieldset [disabled]="isDisabled()">
-        <h3>Cadastrar restaurante</h3>
+        <p>Cadastrar restaurante</p>
         <div class="area-campos">
             <textfield [(ngModel)]="restaurante.nome" name="nome" ngDefaultControl id="campo-nome" texto="Nome Restaurante" [obrigatorio]=true placeholder="Digite o nome"></textfield>
             <app-file-chooser texto="Imagem" textoPlaceholder="Selecione a imagem de perfil" #fileUpload></app-file-chooser>

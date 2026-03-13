@@ -2,19 +2,46 @@
     padding-bottom: 100px;
 }
 
+.area-adicionar{
+  margin-bottom: 40px;
+}
+
 .nome-categoria{
     font-weight: bold;
     margin-bottom: 20px;
     color: #3E374B;
     font-size: 20px;
+    margin-right: 10px;    
+    display: inline-block;
+    width: 100%;
+}
+
+.nenhum {
+  width: 100%;
+  text-align: center;
+  margin-top: 50px;
+  opacity: 0.5;
+}
+
+.nenhum p {
+  margin-top: 10px;
 }
 
 .container-categoria{
-    margin-bottom: 40px;
+  margin-bottom: 40px;
+}
+
+.cabecalho-categoria{
+  display: flex;
+}
+
+.cabecalho-categoria fa-icon{
+  cursor: pointer;
+  font-size: 16px;
 }
 
 .item-box{
-  cursor: move;
+  cursor: grab;
   overflow: hidden;
 }
 

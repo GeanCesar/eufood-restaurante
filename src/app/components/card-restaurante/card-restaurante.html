@@ -1,11 +1,11 @@
-<button class="card-restaurante">
+<button class="card-restaurante" >
     <div class="remover">
         <fa-icon (click)="mostraModal()" [icon]="faTimes"></fa-icon>
     </div>
-    <div class="card-imagem">
+    <div class="card-imagem" (click)="abrirCardapio()">
         <img draggable="false" [src]="!restaurante?.imagemCarregada ? '/imgs/no-img.png' : restaurante?.imagemBaixada">
     </div>
-    <div class="card-nome">
+    <div class="card-nome" (click)="abrirCardapio()">
         <p>{{restaurante?.nome}}</p>
     </div>
 </button>

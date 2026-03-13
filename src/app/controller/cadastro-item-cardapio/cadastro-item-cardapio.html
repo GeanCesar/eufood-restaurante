@@ -14,7 +14,7 @@
 
                 <div class="col-md-12 container-imagem">        
                     <app-file-chooser [(ngModel)]="item().imagemBaixada" name="fileUpload" ngDefaultControl class="col-md-12" textoPlaceholder="Selecione a imagem do item" #fileUpload (onChangeFile)="onSeleciona($event)"></app-file-chooser>        
-                    <img [src]="item().imagemBaixada">
+                    <img [src]="item().imagemBaixada" name="imagemItem">
                 </div>
 
                 <div class="col-md-12 container-campos">

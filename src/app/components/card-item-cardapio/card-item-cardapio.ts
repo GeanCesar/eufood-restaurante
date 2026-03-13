@@ -7,7 +7,6 @@ import { NumberFormatPipe } from '../../util/number.pipe';
 import { ItemSubItem } from '../../model/item-subitem';
 import { CategoriaSubItem } from '../../model/categoria-subitem';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
-import { RespostaRequisicao } from '../../model/rest/resposta-requisicao';
 import { SubItemCardapioRest } from '../../model/rest/sub-item-cardapio-rest';
 import { CardSubitemCardapio } from "../card-subitem-cardapio/card-subitem-cardapio";
 import { CategoriaItemCardapio } from '../../model/categoria-item-cardapio';

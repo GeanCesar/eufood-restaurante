@@ -1,6 +1,6 @@
 import { Component, inject, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { HttpClient, HttpEvent, HttpEventType } from '@angular/common/http';
+import { HttpClient, HttpEvent, HttpEventType, HttpHeaders } from '@angular/common/http';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
 
 import { Footer } from "../../components/footer/footer"
@@ -10,7 +10,6 @@ import { Logo } from '../../components/logo/logo';
 import { Usuario } from '../../model/usuario';
 import { tap } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
-import { RespostaRequisicao } from '../../model/rest/resposta-requisicao';
 
 @Component({
   selector: 'app-login',
@@ -33,38 +32,32 @@ export class Login {
   async onSubmit(): Promise<void> {    
     if(this.validaCampos()) {
       const url = "/usuario_login/login";      
-      this.isDisabled.set(true);
+      this.isDisabled.set(true);      
+      this.progress.set(true);
 
-      this.http.post(url, this.usuario, {
-        observe: 'events',
-        reportProgress: true
-      }).pipe(        
-        tap((message : HttpEvent<Object>) => {          
-          if (message.type == HttpEventType.UploadProgress) {
-            this.progress.set(true);
-          } else if(message.type == HttpEventType.DownloadProgress) {
-            this.progress.set(false);
-          }
-        }),
-      ).subscribe(data => {
-        if(data.type == HttpEventType.Response) {
-          this.progress.set(false);
+       const headers = new HttpHeaders({
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer ' + sessionStorage.getItem("accessToken"),
+          'Accept': 'text/plain'          
+      });
+
+      this.http.post(url, this.usuario, {headers: headers, responseType: 'text'}).subscribe(data => {
+        if(data) {
+          this.progress.set(false);      
+          this.isDisabled.set(false);   
           this.mensagem.set("");
-          let resposta = Object.create(RespostaRequisicao);
-          resposta = {...resposta, ...data.body}          
-          sessionStorage.setItem('accessToken', resposta.extra)
+          sessionStorage.setItem('accessToken', data as string)
           this.isDisabled.set(false);
-          
           this.router.navigate(['/controller/restaurantes'], { relativeTo: this.route });
         }        
-      }, error => {        
-         this.mostraErro();
+      }, error => {
+         this.mostraErro(error);
       });
     }
   }
 
-  mostraErro() : void {
-    this.mensagem.set("Usuário / senhas inválidos");
+  mostraErro(error : string) : void {
+    this.mensagem.set(error);
     this.progress.set(false);
     this.isDisabled.set(false);
   }

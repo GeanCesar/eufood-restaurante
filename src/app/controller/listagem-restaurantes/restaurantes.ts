@@ -10,7 +10,6 @@ import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import { CadastroRestaurante } from "../cadastro-restaurante/cadastro-restaurante";
 import { Modal } from "../../components/modal/modal";
 import { ModalSimNao } from "../modal-sim-nao/modal-sim-nao";
-import { RespostaRequisicao } from '../../model/rest/resposta-requisicao';
 import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
@@ -29,8 +28,7 @@ export class Restaurantes implements OnInit{
 
   buscouItens? : boolean;
 
-  ngOnInit(): void {    
-
+  ngOnInit(): void {
     if(!this.buscouItens) {
       this.buscouItens = true;
       const url = '/restaurante/listar/usuario';
@@ -40,11 +38,8 @@ export class Restaurantes implements OnInit{
         'Authorization': 'Bearer ' + sessionStorage.getItem("accessToken")
       });
 
-      this.http.get(url,  { headers : headers}).subscribe(data => {
-          let resposta : RespostaRequisicao = Object.create(RespostaRequisicao);
-          resposta = {...resposta, ...data}  
-
-          for(let restaurante of resposta.extra as Array<Restaurante> ) {
+      this.http.get<Array<Restaurante>>(url,  { headers : headers}).subscribe(data => {
+          for(let restaurante of data) {
             this.restaurantes.update(values => [...values, restaurante]);
 
             setTimeout(() => this.buscaImagem(restaurante), 100);
@@ -74,10 +69,6 @@ export class Restaurantes implements OnInit{
         this.restaurantes.update( restaurante => restaurante.slice() );
     });
 
-  }
-
-  adicionarItem(restaurante: Restaurante) {    
-    this.router.navigate(['controller/alteracao-item-cardapio'], { queryParams: { uuid_restaurante : restaurante.uuid}});
   }
 }
 

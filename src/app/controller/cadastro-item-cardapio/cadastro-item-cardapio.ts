@@ -9,7 +9,6 @@ import { HttpClient, HttpEventType, HttpHeaders, HttpParams } from '@angular/com
 import { ItemCardapio } from '../../model/item-cardapio';
 import { Checkbox } from "../../components/checkbox/checkbox";
 import { FileChooser } from "../../components/file-chooser/file-chooser";
-import { RespostaRequisicao } from '../../model/rest/resposta-requisicao';
 import { Button } from "../../components/button/button";
 import { CadastrarItemCardapioRest } from '../../model/rest/cadastrar-item-cardapio-rest';
 import { IFileChooserListener } from '../../model/listeners/file-chooser-listener';
@@ -19,6 +18,7 @@ import { ActivatedRoute, Params, Router } from '@angular/router';
 import {Location} from '@angular/common';
 import { CurrencyI18nDirective } from '../../util/currency-i18n.directive';
 import { CurrencyPipe } from '@angular/common';
+import { ItemCardapioService } from '../../services/item-cardapio-service';
 
 @Component({
   selector: 'app-cadastro-item-cardapio',
@@ -33,12 +33,10 @@ export class CadastroItemCardapio implements OnInit, IFileChooserListener {
 
   item = signal<ItemCardapio>(new ItemCardapio());
     
-  constructor(private http:HttpClient, private router : Router, private route: ActivatedRoute, private _location : Location, private currencyPipe : CurrencyPipe) {}
+  constructor(private http:HttpClient, private router : Router, private route: ActivatedRoute, private _location : Location, private itemService : ItemCardapioService) {}
 
   @Input() subItem ? : Checkbox;
   @ViewChild('fileUpload') fileSelector? : FileChooser;
-
-  @ViewChild('preco') txtPreco ? : Textfield;
 
   uuidRestaurante : string = "";
   uuidItemAlteracao ? : string;
@@ -52,6 +50,20 @@ export class CadastroItemCardapio implements OnInit, IFileChooserListener {
     this.buscarItem();
     this.buscarCategorias();
     this.fileSelector?.setListener(this);
+  }
+
+  carregaImagem(item : ItemCardapio){
+    if(item && item.uuid) {
+      let uuid = item.uuid;
+      if(uuid) {
+        this.itemService.buscaImagem(uuid).subscribe(arquivo => {          
+            var imagem = URL.createObjectURL(arquivo)  
+            item.imagemBaixada = imagem;   
+            item.imagemCarregada = true;
+            this.item.set(item);         
+        });        
+      }
+    }
   }
 
   buscarItem(){
@@ -68,17 +80,14 @@ export class CadastroItemCardapio implements OnInit, IFileChooserListener {
 
       const parametros = { params: params, headers : headers}
 
-      this.http.get(url,  parametros).subscribe(data => {
-          let resposta : RespostaRequisicao = Object.create(RespostaRequisicao);
-          resposta = {...resposta, ...data}
-          let item = resposta.extra as ItemCardapio
-          this.carregaCampos(item);
+      this.http.get<ItemCardapio>(url,  parametros).subscribe(data => {        
+          this.carregaCampos(data);
       });
     }
   }
 
-  carregaCampos(item: ItemCardapio) {
-    this.item.set(item);
+  carregaCampos(item: ItemCardapio) {    
+    this.carregaImagem(item);
   }
 
   alterarSubitens() {
@@ -86,8 +95,6 @@ export class CadastroItemCardapio implements OnInit, IFileChooserListener {
   }
 
   alteraCategoria(event: any) {
-    
-
     if(event != null) {
       if((event as CategoriaItemCardapio).uuid) {
         this.item().categoria = event;
@@ -113,8 +120,8 @@ export class CadastroItemCardapio implements OnInit, IFileChooserListener {
         'Content-Type': 'application/json'
       });
 
-      this.http.post(url, categoria, { headers: headers }).subscribe(data => {
-          let uuidCadastrado = (data as RespostaRequisicao).extra as string;
+      this.http.post(url, categoria, { headers: headers, responseType: 'text' }).subscribe(data => {
+          let uuidCadastrado = data;
           categoria.uuid = uuidCadastrado;
       });
   }
@@ -189,13 +196,12 @@ export class CadastroItemCardapio implements OnInit, IFileChooserListener {
         });
 
       this.http.post(url, rest, {      
-        headers : headers
+        headers : headers,
+        responseType: 'text'
       }).subscribe(data => {
-          let resposta : RespostaRequisicao = Object.create(RespostaRequisicao);
-          resposta = {...resposta, ...data};
-          if(resposta && resposta.extra) {
+          if(data) {
             if(this.item().imagemBaixada) {
-              this.item().uuid = resposta.extra as string;
+              this.item().uuid = data;
               this.uploadImagem();
             }
           }
@@ -229,9 +235,6 @@ export class CadastroItemCardapio implements OnInit, IFileChooserListener {
       })     
       .subscribe(data => {
         if(data.type == HttpEventType.Response) {
-          let resposta = Object.create(RespostaRequisicao);
-          resposta = {...resposta, ...data.body}
-          
           this.router.navigate(['controller/alteracao-item-cardapio'], { queryParams: { uuid_restaurante : this.uuidRestaurante}});
         }        
       });      

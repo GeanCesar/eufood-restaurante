@@ -5,7 +5,6 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { ItemCardapio } from '../../model/item-cardapio';
 import { OptionDataList } from '../../model/option-datalist';
 import { Modal } from '../../components/modal/modal';
-import { RespostaRequisicao } from '../../model/rest/resposta-requisicao';
 import { ISelecaoSubItemListener } from '../../model/listeners/selecao-sub-item-listener';
 import { FormsModule } from "@angular/forms";
 import { SubItemCardapioRest } from '../../model/rest/sub-item-cardapio-rest';
@@ -63,11 +62,8 @@ export class ModalSelecaoItem {
       'Authorization': 'Bearer ' + sessionStorage.getItem("accessToken")
     });
 
-    this.http.get(url,  { headers : headers}).subscribe(data => {
-        let resposta : RespostaRequisicao = Object.create(RespostaRequisicao);
-        resposta = {...resposta, ...data}  
-
-        for(let item of resposta.extra as Array<ItemCardapio> ) {
+    this.http.get<Array<ItemCardapio>>(url,  { headers : headers}).subscribe(data => {
+        for(let item of data) {
           let option : OptionDataList = new OptionDataList();
           option.objeto = item;
           option.texto = item.nome;

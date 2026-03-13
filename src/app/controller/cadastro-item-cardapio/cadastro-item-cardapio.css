@@ -27,6 +27,7 @@
 
 .container-imagem {
     display: flex;
+    margin-top: 0!important;
 }
 
 .container-imagem app-file-chooser{    

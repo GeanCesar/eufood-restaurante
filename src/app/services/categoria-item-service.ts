@@ -22,4 +22,15 @@ export class CategoriaItemService {
 
         return this.httpClient.get<CategoriaItemCardapio[]>(baseUrl, parametros);
     }
+
+    atualizarOrdem(uuidRestaurante : string, uuidCategoria : string, ordem : number): Observable<String> {
+        const baseUrl = '/restaurante/categoria/atualizar_ordem?uuid-restaurante=' + uuidRestaurante + "&ordem=" + ordem + "&uuid-categoria=" + uuidCategoria;
+
+        const headers = new HttpHeaders({
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + sessionStorage.getItem("accessToken")
+        });
+
+        return this.httpClient.patch(baseUrl, "", {headers : headers, responseType: 'text'});
+    }
 }

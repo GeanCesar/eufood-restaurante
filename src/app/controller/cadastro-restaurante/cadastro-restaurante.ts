@@ -7,7 +7,6 @@ import { FormsModule } from '@angular/forms';
 import { HttpClient, HttpEvent, HttpEventType, HttpHeaders } from '@angular/common/http';
 import { Restaurante } from '../../model/restaurante';
 import { ActivatedRoute, Route, Router } from '@angular/router';
-import { RespostaRequisicao } from '../../model/rest/resposta-requisicao';
 
 @Component({
   selector: 'app-cadastro-restaurante',
@@ -40,16 +39,12 @@ export class CadastroRestaurante {
 
     this.http.post(url, this.restaurante, {      
         headers : headers,
-        observe: 'events',
-        reportProgress: true
-      }).subscribe(data => {
-        if(data.type == HttpEventType.Response) {
-          let resposta = Object.create(RespostaRequisicao);
-          resposta = {...resposta, ...data.body}
-          
-          this.uuidRestaurante = (resposta as RespostaRequisicao).extra as string;
-          this.uploadImagem();
-        }        
+        responseType: 'text'
+      }).subscribe(data => {        
+        this.uuidRestaurante = data;
+        this.uploadImagem();     
+        this.isDisabled.set(false);
+        this.progress.set(false);   
       }, () => {
         this.progress.set(false);
         this.isDisabled.set(false);
@@ -76,8 +71,6 @@ export class CadastroRestaurante {
       .subscribe(data => {
         if(data.type == HttpEventType.Response) {
           this.progress.set(false);
-          let resposta = Object.create(RespostaRequisicao);
-          resposta = {...resposta, ...data.body}
           
           this.isDisabled.set(false);    
           this.progress.set(false);

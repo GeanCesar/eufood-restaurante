@@ -16,7 +16,6 @@ import { CadastrarCategoriaSubItemInterceptor } from '../../model/rest/cadastrar
 import { SubItemCardapioRest } from '../../model/rest/sub-item-cardapio-rest';
 import { Modal } from "../../components/modal/modal";
 import { ModalSelecaoItem } from "../modal-selecao-item/modal-selecao-item";
-import { RespostaRequisicao } from '../../model/rest/resposta-requisicao';
 import { ISelecaoSubItemListener } from '../../model/listeners/selecao-sub-item-listener';
 import { ActivatedRoute, Params } from '@angular/router';
 import { Header } from "../../components/header/header";
@@ -149,9 +148,7 @@ export class SelecaoSubItem implements OnInit, ISelecaoSubItemListener {
 
     const parametros = { params: params, headers : headers}
 
-    this.http.delete(url, parametros).subscribe(data => {
-        let resposta = Object.create(RespostaRequisicao);
-        resposta = {...resposta, ...data};
+    this.http.delete(url, parametros).subscribe(() => {
         this.getSubItensPorCategoria(this.categoriaSelecionada().uuid);
       }, error => {
         console.log(error);
@@ -176,10 +173,8 @@ export class SelecaoSubItem implements OnInit, ISelecaoSubItemListener {
       const parametros = { params: params, headers : headers}
 
       this.http.put(url, "", parametros).subscribe(data => {
-          let resposta : RespostaRequisicao = Object.create(RespostaRequisicao);
-          resposta = {...resposta, ...data};
-          if(resposta && resposta.extra) {
-            subItem.uuidAssociacao = resposta.extra as string;
+          if(data) {
+            subItem.uuidAssociacao = data as string;
             this.atualizaOrdem();
           }
         }, error => {
@@ -202,9 +197,8 @@ export class SelecaoSubItem implements OnInit, ISelecaoSubItemListener {
 
       const parametros = { params: params, headers : headers}
 
-      this.http.patch(url, "", parametros).subscribe(data => {
-          let resposta = Object.create(RespostaRequisicao);
-          resposta = {...resposta, ...data}
+      this.http.patch(url, "", parametros).subscribe(() => {
+        
         }, error => {
           console.log(error);
         });
@@ -228,9 +222,8 @@ export class SelecaoSubItem implements OnInit, ISelecaoSubItemListener {
 
       this.categoriaSelecionada().uuidRestaurante = "1d77cd66-78c4-4d7a-847b-242f354f25e9";
 
-      this.http.patch(url, new CadastrarCategoriaSubItemInterceptor(this.categoriaSelecionada()), parametros).subscribe(data => {
-          let resposta = Object.create(RespostaRequisicao);
-          resposta = {...resposta, ...data}
+      this.http.patch(url, new CadastrarCategoriaSubItemInterceptor(this.categoriaSelecionada()), parametros).subscribe(() => {
+        
         }, error => {
           console.log(error);
         });
@@ -253,8 +246,7 @@ export class SelecaoSubItem implements OnInit, ISelecaoSubItemListener {
         reportProgress: true
       }).subscribe(data => {
         if(data.type == HttpEventType.Response) {
-          let resposta = Object.create(RespostaRequisicao);
-          resposta = {...resposta, ...data.body}
+          
         }        
       }, error => {
         console.log(error);
@@ -269,20 +261,17 @@ export class SelecaoSubItem implements OnInit, ISelecaoSubItemListener {
       'Authorization': 'Bearer ' + sessionStorage.getItem("accessToken")
     });
 
-    this.http.get(url,  { headers : headers}).subscribe(data => {
-      let resposta : RespostaRequisicao = Object.create(RespostaRequisicao);
-      resposta = {...resposta, ...data}  
-
+    this.http.get<Array<any>>(url,  { headers : headers}).subscribe(data => {
       if(this.categoriaSelecionada) {
         this.categoriaSelecionada().itensAdicionados = [];
         this.subItensSelecionados().splice;
 
-        if((resposta.extra as Array<any>).length <= 0) {
+        if((data).length <= 0) {
           this.atualizaLista();
         }
       }
 
-      for(let item of resposta.extra as Array<ItemSubItem> ) {
+      for(let item of data as Array<ItemSubItem> ) {
         if(item.subItem && this.categoriaSelecionada().itensAdicionados && item.uuid) {
           let subItemRest = new SubItemCardapioRest();
           subItemRest.fromItemCardapio(item.subItem, item.uuid);
@@ -310,11 +299,8 @@ export class SelecaoSubItem implements OnInit, ISelecaoSubItemListener {
       'Authorization': 'Bearer ' + sessionStorage.getItem("accessToken")
     });
 
-    this.http.get(url,  { headers : headers}).subscribe(data => {
-        let resposta : RespostaRequisicao = Object.create(RespostaRequisicao);
-        resposta = {...resposta, ...data}  
-
-        for(let categoria of resposta.extra as Array<CategoriaSubItem> ) {
+    this.http.get<Array<CategoriaSubItem>>(url,  { headers : headers}).subscribe(data => {
+        for(let categoria of data) {
           this.categorias.update(values => [...values, categoria]);
         }
     });
