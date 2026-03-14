@@ -2,7 +2,7 @@
 
 body {
     margin: 0;
-    background-color: #f7f7f7!important;
+    background-color: #eaeaea!important;
     min-height: 100%;
 }
 
@@ -47,5 +47,6 @@ hr {
 }
 
 .container-conteudo{
-    min-height: calc(100% - 203px);
+    min-height: calc(100% - 207px);
+    background-color: #F4F4F4;
 }

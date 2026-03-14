@@ -17,6 +17,8 @@ import { ItemCardapioService } from '../../services/item-cardapio-service';
 import { CategoriaItemService } from '../../services/categoria-item-service';
 import { faAngleDown, faAngleUp } from '@fortawesome/free-solid-svg-icons';
 import { FaIconComponent } from "@fortawesome/angular-fontawesome";
+import { Restaurante } from '../../model/restaurante';
+import { RestauranteService } from '../../services/restaurante-service';
 
 @Component({
   selector: 'app-alteracao-cardapio-item',
@@ -32,7 +34,7 @@ export class AlteracaoCardapioItem implements OnInit {
   categorias = signal<CategoriaItemCardapio[]>([]);
   categoriasBuscadas : CategoriaItemCardapio[] = [];
 
-  uuidRestaurante : string = "";
+  restaurante : Restaurante = new Restaurante();
 
   carregando = signal<boolean>(true);
 
@@ -40,14 +42,23 @@ export class AlteracaoCardapioItem implements OnInit {
        private route : ActivatedRoute,
        private subItemService : SubItemService,
        private itemService : ItemCardapioService,
+       private restauranteService : RestauranteService,
        private categoriaItemService : CategoriaItemService) {}
 
   ngOnInit(): void {    
     this.route.queryParams.subscribe((params: Params) => {
-      this.uuidRestaurante = params['uuid_restaurante'];
+      this.restaurante = new Restaurante();
+      this.restaurante.uuid = params['uuid_restaurante'];
+
+      if(this.restaurante.uuid) {
+        this.restauranteService.buscaRestaurante(this.restaurante.uuid).subscribe(data => {
+          this.restaurante = data;
+          this.listaCategorias();
+        });
+      }
+      
     });
     
-    this.listaCategorias();
   }
 
   abaixarCategoria(categoria: CategoriaItemCardapio) {
@@ -91,8 +102,8 @@ export class AlteracaoCardapioItem implements OnInit {
     let i : number = 0;
     for(let categoria of this.categorias()) {
         i++;
-        if(categoria.uuid && categoria.ordem)
-          this.categoriaItemService.atualizarOrdem(this.uuidRestaurante, categoria.uuid, categoria.ordem).subscribe();
+        if(categoria.uuid && categoria.ordem && this.restaurante.uuid)
+          this.categoriaItemService.atualizarOrdem(this.restaurante.uuid, categoria.uuid, categoria.ordem).subscribe();
     }
   }
 
@@ -101,73 +112,79 @@ export class AlteracaoCardapioItem implements OnInit {
       let i : number = 0;
       for(let item of categoria.itensAdicionados) {
         i++;
-        if(item.uuid) {
-          this.itemService.atualizaOrdem(this.uuidRestaurante, item.uuid, i).subscribe();
+        if(item.uuid && this.restaurante.uuid) {
+          this.itemService.atualizaOrdem(this.restaurante.uuid, item.uuid, i).subscribe();
         }
       }
     }
   }
 
   cadastrarItem() {
-    this.router.navigate(['controller/cadastro-item-cardapio'], { queryParams: { uuid_restaurante : this.uuidRestaurante}});
+    this.router.navigate(['controller/cadastro-item-cardapio'], { queryParams: { uuid_restaurante : this.restaurante.uuid}});
   }
 
   listaCategorias(){
     this.categorias.set([])
     this.categorias().splice; 
 
-    this.categoriaItemService.listarCategorias(this.uuidRestaurante).subscribe(data => {
-        for(let categoria of data) {
-          categoria.itensAdicionados = [];
-          this.categoriasBuscadas.push(categoria);
-        }
-        setTimeout(() => this.listaItens(), 100);
-    }, () => {
-      this.carregando.set(false);
-    });
+    if(this.restaurante.uuid){
+      this.categoriaItemService.listarCategorias(this.restaurante.uuid).subscribe(data => {
+          for(let categoria of data) {
+            categoria.itensAdicionados = [];
+            this.categoriasBuscadas.push(categoria);
+          }
+          setTimeout(() => this.listaItens(), 100);
+      }, () => {
+        this.carregando.set(false);
+      });
+    }
+    
   }
 
   // Executa o GET para listagem de itens
   listaItens(){
-    const url = '/restaurante/item_cardapio/listar';
+    if(this.restaurante.uuid){
+      const url = '/restaurante/item_cardapio/listar';
 
-    const headers = new HttpHeaders({
-      'Content-Type': 'application/json',
-      'Authorization': 'Bearer ' + sessionStorage.getItem("accessToken")
-    });
-    
-    const params = new HttpParams().set("uuid-restaurante", this.uuidRestaurante);
+      const headers = new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + sessionStorage.getItem("accessToken")
+      });
+      
+      const params = new HttpParams().set("uuid-restaurante", this.restaurante.uuid);
 
-    const parametros = { params: params, headers : headers}
+      const parametros = { params: params, headers : headers}
 
-    this.http.get<Array<ItemCardapio>>(url, parametros).subscribe(data => {
-        for(let item of data ) {
-          for(let categoria of this.categoriasBuscadas) {
-            if(item.categoria?.uuid === categoria.uuid && item.uuid) {
-              this.subItemService.getCategorias(this.uuidRestaurante, item.uuid).subscribe((subs) => {
-                item.categoriaSubItens = subs;
+      this.http.get<Array<ItemCardapio>>(url, parametros).subscribe(data => {
+          for(let item of data ) {
+            for(let categoria of this.categoriasBuscadas) {
+              if(item.categoria?.uuid === categoria.uuid && item.uuid && this.restaurante.uuid) {
+                this.subItemService.getCategorias(this.restaurante.uuid, item.uuid).subscribe((subs) => {
+                  item.categoriaSubItens = subs;
+                });
+
+                categoria.itensAdicionados.push(item);
+              }
+            }
+            
+            if(item.uuid) {
+              this.itemService.buscaImagem(item.uuid).subscribe((arquivo) => {
+                var imagem = URL.createObjectURL(arquivo)  
+                item.imagemBaixada = imagem;   
+                item.imagemCarregada = true;
               });
-
-              categoria.itensAdicionados.push(item);
             }
           }
-          
-          if(item.uuid) {
-            this.itemService.buscaImagem(item.uuid).subscribe((arquivo) => {
-              var imagem = URL.createObjectURL(arquivo)  
-              item.imagemBaixada = imagem;   
-              item.imagemCarregada = true;
-            });
-          }
-        }
 
-        setTimeout(() => {
+          setTimeout(() => {
+            this.categorias.set(this.categoriasBuscadas);
+            this.carregando.set(false);
+          }, 300);
+      }, error => {
           this.categorias.set(this.categoriasBuscadas);
           this.carregando.set(false);
-        }, 300);
-    }, error => {
-        this.categorias.set(this.categoriasBuscadas);
-        this.carregando.set(false);
-    });
+      });
+    }
+    
   }
 }

@@ -1,11 +1,20 @@
 <app-header></app-header>
 
-<div class="container-conteudo">
-    <div class="container"> 
+<div class="cabecalho-tela">
+    @if(!carregando()) {    
+        <p class="nome-restaurante">{{restaurante.nome}}</p>
+        <p> | </p>
+        <p class="nome-tela">Cardápio</p>    
+    }
+</div>
 
+<div class="container-conteudo">
+    <div class="container">
         @if(carregando()) {
-            <p>Carregando...</p>
-            <mat-progress-bar mode="query"></mat-progress-bar>
+            <div class="carregando">
+                <p>Carregando...</p>
+                <mat-progress-bar mode="query"></mat-progress-bar>
+            </div>            
         } @else {
             <div class="right area-adicionar">
                 <app-button texto="Cadastrar item" (click)="cadastrarItem()"></app-button>

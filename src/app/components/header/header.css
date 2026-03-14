@@ -1,5 +1,5 @@
 .logo {
-    height: 100px;
+    height: 60px;
     width: 120px;
     display: inline-block;
 }
@@ -10,7 +10,7 @@
 
 .header {
     padding: 30px 30px 15px 30px;
-    background-color: transparent;
+    background-color: #EAEAEA;
 }
 
 .user {
