@@ -1,6 +1,6 @@
-import { CategoriaItemCardapio } from "../categoria-item-cardapio";
-import { ItemCardapio } from "../item-cardapio";
-import { ItemSubItem } from "../item-subitem";
+import { CategoriaItemCardapio } from "../../categoria-item-cardapio";
+import { ItemCardapio } from "../../item-cardapio";
+import { ItemSubItem } from "../../item-subitem";
 
 export class SubItemCardapioRest {
     descricao? : string;

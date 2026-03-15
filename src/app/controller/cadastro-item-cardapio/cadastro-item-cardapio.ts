@@ -10,7 +10,7 @@ import { ItemCardapio } from '../../model/item-cardapio';
 import { Checkbox } from "../../components/checkbox/checkbox";
 import { FileChooser } from "../../components/file-chooser/file-chooser";
 import { Button } from "../../components/button/button";
-import { CadastrarItemCardapioRest } from '../../model/rest/cadastrar-item-cardapio-rest';
+import { CadastrarItemCardapioRest } from '../../model/rest/cardapio/cadastrar-item-cardapio-rest';
 import { IFileChooserListener } from '../../model/listeners/file-chooser-listener';
 import { Header } from "../../components/header/header";
 import { Footer } from '../../components/footer/footer';

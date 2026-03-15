@@ -1,17 +1,15 @@
-import { Component, NgModule } from '@angular/core';
-import { RouterModule, RouterOutlet } from "@angular/router";
-import { CommonModule } from '@angular/common';
-import { SelecaoSubItem } from "./controller/selecao-sub-item/selecao-sub-item";
+import { Component } from '@angular/core';
+import { RouterOutlet } from "@angular/router";
 
 import { NgSelectModule } from '@ng-select/ng-select';
 import { FormsModule } from '@angular/forms';
-import { CadastroItemCardapio } from "./controller/cadastro-item-cardapio/cadastro-item-cardapio";
-import { AlteracaoCardapioItem } from "./controller/alteracao-cardapio-item/alteracao-cardapio-item";
+import { CardPedido } from './components/card-pedido/card-pedido';
+import { ListagemPedidos } from "./controller/listagem-pedidos/listagem-pedidos";
 
 
 @Component({
   selector: 'app-root',
-  imports: [NgSelectModule, FormsModule, RouterOutlet, SelecaoSubItem, CadastroItemCardapio, AlteracaoCardapioItem],
+  imports: [NgSelectModule, FormsModule, RouterOutlet, CardPedido, ListagemPedidos],
   templateUrl: './app.html',
   styleUrl: './app.css',
 })

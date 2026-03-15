@@ -31,9 +31,9 @@ export class CardRestaurante implements IModalSimNaoListener {
     this.removerRestaurante();
   }
 
-  abrirCardapio() {    
+  abrirDashboard() {    
     if(this.restaurante)
-      this.router.navigate(['controller/alteracao-item-cardapio'], { queryParams: { uuid_restaurante : this.restaurante.uuid}});
+      this.router.navigate(['/controller/dashboard'], { queryParams: { uuid_restaurante : this.restaurante.uuid}});
   }
 
   mostraModal(){
@@ -55,8 +55,6 @@ export class CardRestaurante implements IModalSimNaoListener {
           this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
           this.router.navigate(['/controller/restaurantes'], { relativeTo: this.route });
         });
-      }, error => {
-        debugger;
       });
     }
 }

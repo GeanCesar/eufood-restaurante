@@ -1,0 +1,87 @@
+.area-notificacao{
+    overflow: hidden;
+}
+
+.carregando {
+    margin-top: 20px;
+}
+
+.cabecalho-tela {
+  min-height: 44px;
+}
+
+.cabecalho-tela {
+  background-color: #eaeaea;
+}
+
+.cabecalho-tela .nome-restaurante {
+  color: #6A33CA;
+  font-weight: bold;
+}
+
+.cabecalho-tela p {
+  display: inline-block;
+  color: #3E374B;
+  margin-left: 30px;
+  margin-bottom: 5px;
+}
+
+.cabecalho-tela .nome-tela{
+  font-weight: bold;
+}
+
+.novo-pedido-container{
+    background-color: #6A33CA;
+    color: white;
+    padding: 20px;
+    border-radius: 10px 0px 0px 10px;
+    float: right;
+    margin-top: 20px;
+}
+
+.novo-pedido-container p {
+    margin-bottom: 0;
+    font-size: 14px;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.conteudo-pedidos {
+    margin-top: 25px;
+    display: flex;
+    gap: 40px;
+    margin-bottom: 20px;
+}
+
+.conteudo-pedido {
+    background-color: white;
+    border-radius: 10px;
+    text-align: center;
+    align-self: flex-start;
+    min-height: 200px;
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+}
+
+.conteudo-pedido fa-icon {
+  font-size: 40px;
+}
+
+.conteudo-pedido .nenhum {  
+  opacity: 0.2;
+  margin: auto;
+}
+
+.enter-animation {
+  animation: slide-fade 0.8s;
+}
+
+@keyframes slide-fade {
+  from {
+    transform: translateX(400px);
+  }
+  to {
+    transform: translateX(0);
+  }
+}

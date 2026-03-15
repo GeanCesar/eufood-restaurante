@@ -1,5 +1,5 @@
 import { ItemCardapio } from "./item-cardapio";
-import { SubItemCardapioRest } from "./rest/sub-item-cardapio-rest";
+import { SubItemCardapioRest } from "./rest/cardapio/sub-item-cardapio-rest";
 
 export class CategoriaSubItem {
 

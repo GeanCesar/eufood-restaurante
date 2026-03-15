@@ -1,0 +1,47 @@
+<app-header></app-header>
+
+<div class="cabecalho-tela">
+    @if(!carregando()) {    
+        <p class="nome-restaurante">{{restaurante().nome}}</p>
+        <p> | </p>
+        <p class="nome-tela">Pedidos</p>    
+    }
+</div>
+
+<div class="container-conteudo">
+    <div class="area-notificacao">
+        <div class="novo-pedido-container enter-animation">
+            <p>2 novos pedido aguardando confirmação</p>
+        </div>
+    </div>
+    
+
+    <div class="container">
+        <div class="container-pedidos">
+            @if(carregando()) {    
+                <div class="carregando">
+                    <p>Carregando...</p>
+                    <mat-progress-bar mode="query"></mat-progress-bar>
+                </div>
+            } @else {
+                <div class="col-md-12 conteudo-pedidos">
+                    <div class="col-md-4 ">
+                        @for(pedido of pedidos(); track $index) {
+                            <app-card-pedido [pedido]="pedido" />
+                        }
+                    </div>
+                    <div class="col-md-8 conteudo-pedido">         
+                        <div class="nenhum">
+                            <fa-icon [icon]="faBasketShopping"></fa-icon>
+                            <p>Nenhum pedido selecionado...</p>
+                        </div>                                       
+                    </div>
+                </div>
+            }
+        </div>
+    </div>    
+</div>
+
+<footer></footer>
+
+

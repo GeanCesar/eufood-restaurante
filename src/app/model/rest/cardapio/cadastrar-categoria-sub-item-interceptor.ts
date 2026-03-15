@@ -1,4 +1,4 @@
-import { CategoriaSubItem } from "../categoria-subitem";
+import { CategoriaSubItem } from "../../categoria-subitem";
 
 export class CadastrarCategoriaSubItemInterceptor{
     descricao ? : string;

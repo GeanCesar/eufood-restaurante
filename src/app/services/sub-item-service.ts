@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { CategoriaSubItemRest } from "../model/rest/categoria-sub-item-rest";
+import { CategoriaSubItemRest } from "../model/rest/cardapio/categoria-sub-item-rest";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Observable } from "rxjs";
 

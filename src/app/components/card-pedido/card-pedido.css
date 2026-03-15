@@ -1,0 +1,74 @@
+* {    
+    cursor: pointer;
+}
+
+.status-pedido {
+    width: 5px;
+}
+
+.status-criado {    
+    background-color: var(--pedido-criado);
+}
+
+.status-confirmado {    
+    background-color: var(--pedido-confirmado);
+}
+
+.status-despachado {    
+    background-color: var(--pedido-despachado);
+}
+
+.status-cancelado {    
+    background-color: var(--pedido-cancelado);
+}
+
+.status-concluido {    
+    background-color: var(--pedido-concluido);
+}
+
+.pedido{
+    display: flex;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.container-pedido-info {
+    background-color: white;
+    color: #504c4c;
+    padding: 20px;
+    border-radius: 0px 10px 10px 0px;
+    display: flex;
+    width: 100%;
+}
+
+.container-pedido-info:active {
+    background-color: #f7f7f7;
+}
+
+.area-numero-valor{
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.area-numero-valor .right {
+    font-size: 13px;
+}
+
+.texto-pequeno{
+    font-size: 12px;
+}
+
+.info-pedido{
+    width: 100%;
+    display: inline-block;    
+    line-height: 1.10;
+}
+
+.icone {
+    text-align: right;
+    vertical-align: middle;
+    width: 40px;    
+    line-height: 40px;
+    color: #504c4c;
+    opacity: 0.15;    
+}

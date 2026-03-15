@@ -7,7 +7,7 @@ import { OptionDataList } from '../../model/option-datalist';
 import { Modal } from '../../components/modal/modal';
 import { ISelecaoSubItemListener } from '../../model/listeners/selecao-sub-item-listener';
 import { FormsModule } from "@angular/forms";
-import { SubItemCardapioRest } from '../../model/rest/sub-item-cardapio-rest';
+import { SubItemCardapioRest } from '../../model/rest/cardapio/sub-item-cardapio-rest';
 
 @Component({
   selector: 'app-modal-selecao-item',

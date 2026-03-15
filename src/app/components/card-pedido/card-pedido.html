@@ -1,0 +1,20 @@
+<div class="pedido">
+    <div [className]="'status-pedido status-' + getStatus().status?.toLowerCase()"></div>
+    <div class="container-pedido-info">
+        <div class="info-pedido">
+            <div class="col-12 area-numero-valor">
+                <label class="col-6">Pedido #{{pedido?.numeroPedido}}</label>
+                <label class="col-6 right">R$ {{pedido?.valorTotal | numberFormat}}</label>
+            </div>
+
+            <div class="col-12">
+                <label class="col-6 texto-pequeno">{{pedido?.items?.length}} Itens adicionados</label>
+                <label class="col-6 right texto-pequeno">{{pedido?.dataCriacao | date : 'EEEE - HH:mm'}}</label>
+            </div>
+        </div>
+        <div class="icone">
+            <fa-icon [icon]="faAngleRight"></fa-icon>
+        </div>    
+    </div>
+</div>
+

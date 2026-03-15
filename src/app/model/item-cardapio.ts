@@ -1,7 +1,7 @@
 import { CategoriaItemCardapio } from "./categoria-item-cardapio";
 import { CategoriaSubItem } from "./categoria-subitem";
 import { ItemSubItem } from "./item-subitem";
-import { CategoriaSubItemRest } from "./rest/categoria-sub-item-rest";
+import { CategoriaSubItemRest } from "./rest/cardapio/categoria-sub-item-rest";
 
 export class ItemCardapio {
     descricao? : string;

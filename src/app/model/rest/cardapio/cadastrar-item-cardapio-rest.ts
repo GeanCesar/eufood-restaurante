@@ -1,4 +1,4 @@
-import { ItemCardapio } from "../item-cardapio";
+import { ItemCardapio } from "../../item-cardapio";
 
 export class CadastrarItemCardapioRest{
     uuidRestaurante ? : string;

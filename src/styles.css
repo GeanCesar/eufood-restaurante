@@ -1,5 +1,13 @@
 @import "../node_modules/@ng-select/ng-select/themes/default.theme.css";
 
+:root {
+  --pedido-criado: #57DDD2;
+  --pedido-confirmado: #30B156;
+  --pedido-despachado: #E9C13E;
+  --pedido-cancelado: #B13050; 
+  --pedido-concluido: #868686; 
+}
+
 body {
     margin: 0;
     background-color: #eaeaea!important;
@@ -46,7 +54,8 @@ hr {
     text-align: right;
 }
 
-.container-conteudo{
+.container-conteudo {
     min-height: calc(100% - 207px);
     background-color: #F4F4F4;
+    overflow-x: hidden;
 }

@@ -6,15 +6,13 @@ import { ItemCardapio } from '../../model/item-cardapio';
 import { NumberFormatPipe } from '../../util/number.pipe';
 import { ItemSubItem } from '../../model/item-subitem';
 import { CategoriaSubItem } from '../../model/categoria-subitem';
-import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
-import { SubItemCardapioRest } from '../../model/rest/sub-item-cardapio-rest';
+import { HttpClient } from '@angular/common/http';
+import { SubItemCardapioRest } from '../../model/rest/cardapio/sub-item-cardapio-rest';
 import { CardSubitemCardapio } from "../card-subitem-cardapio/card-subitem-cardapio";
-import { CategoriaItemCardapio } from '../../model/categoria-item-cardapio';
-import { ActivatedRoute, Params, Route, Router } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { IModalSimNaoListener } from '../../model/listeners/modal-sim-nao-listener';
 import { Modal } from '../modal/modal';
 import { ModalSimNao } from '../../controller/modal-sim-nao/modal-sim-nao';
-import { CategoriaSubItemRest } from '../../model/rest/categoria-sub-item-rest';
 import { ItemCardapioService } from '../../services/item-cardapio-service';
 
 @Component({
