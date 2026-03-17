@@ -44,10 +44,14 @@ export class SelecaoSubItem implements OnInit, ISelecaoSubItemListener {
   constructor(private http:HttpClient, private route: ActivatedRoute, private subItemService : SubItemService) {}
 
   uuidItemPrincipal : string = "";
+  uuidRestaurante : string = "";
 
   ngOnInit(): void {
-    this.route.params.subscribe((params: Params) => this.uuidItemPrincipal = params['uuid-item-principal']);
-    this.listaCategorias();
+    this.route.queryParams.subscribe((params: Params) => {
+      this.uuidItemPrincipal = params['uuid_item_principal'];
+      this.uuidRestaurante = params['uuid_restaurante'];
+      this.listaCategorias();
+    });
   }
 
   drop(event: CdkDragDrop<ItemCardapio[]>) {
@@ -206,7 +210,7 @@ export class SelecaoSubItem implements OnInit, ISelecaoSubItemListener {
 
       const parametros = { params: params, headers : headers}
 
-      this.categoriaSelecionada().uuidRestaurante = "1d77cd66-78c4-4d7a-847b-242f354f25e9";
+      this.categoriaSelecionada().uuidRestaurante = this.uuidRestaurante;
 
       this.http.patch(url, new CadastrarCategoriaSubItemInterceptor(this.categoriaSelecionada()), parametros).subscribe(() => {
         
@@ -224,7 +228,7 @@ export class SelecaoSubItem implements OnInit, ISelecaoSubItemListener {
       'Authorization': 'Bearer ' + sessionStorage.getItem("accessToken")
     });
 
-    this.categoriaSelecionada().uuidRestaurante = "1d77cd66-78c4-4d7a-847b-242f354f25e9";
+    this.categoriaSelecionada().uuidRestaurante = this.uuidRestaurante;
 
     this.http.post(url, new CadastrarCategoriaSubItemInterceptor(this.categoriaSelecionada()), {      
         headers : headers,
@@ -278,7 +282,7 @@ export class SelecaoSubItem implements OnInit, ISelecaoSubItemListener {
 
   // Faz o GET para retorno das categorias cadastradas
   listaCategorias(){
-    const url = '/restaurante/sub_item/categoria/listar?uuid-restaurante=1d77cd66-78c4-4d7a-847b-242f354f25e9';
+    const url = '/restaurante/sub_item/categoria/listar?uuid-restaurante=' + this.uuidRestaurante;
 
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',

@@ -87,7 +87,8 @@ export class CadastroItemCardapio implements OnInit, IFileChooserListener {
   }
 
   alterarSubitens() {
-    this.router.navigate(['/controller/selecao-sub-item', this.item().uuid]);
+    this.router.navigate(['/controller/selecao-sub-item'], { queryParams: { uuid_restaurante : this.restaurante.uuid, uuid_item_principal : this.item().uuid}});
+    //this.router.navigate(['/controller/selecao-sub-item', this.item().uuid]);
   }
 
   alteraCategoria(event: any) {
@@ -109,6 +110,7 @@ export class CadastroItemCardapio implements OnInit, IFileChooserListener {
   }
 
   private cadastraNovaCategoria(categoria : CategoriaItemCardapio){
+      categoria.ordem = this.categorias().length;
       const url = "/restaurante/categoria/cadastrar";
 
       const headers = new HttpHeaders({

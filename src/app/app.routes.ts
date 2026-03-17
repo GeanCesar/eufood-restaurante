@@ -12,7 +12,7 @@ export const routes: Routes = [
     {path: "controller/login", component : Login},
     {path: "controller/restaurantes", component : Restaurantes, canActivate: [AuthGuard]},
     {path: "controller/cadastro-item-cardapio", component : CadastroItemCardapio, data: {uuid_restaurante: "", uuid_item: ""}, canActivate: [AuthGuard]},
-    {path: "controller/selecao-sub-item/:uuid-item-principal", component : SelecaoSubItem, canActivate: [AuthGuard]},
+    {path: "controller/selecao-sub-item", component : SelecaoSubItem, data: {uuid_restaurante: "", uuid_item_principal: ""}, canActivate: [AuthGuard]},
     {path: "controller/alteracao-item-cardapio", component : AlteracaoCardapioItem, canActivate: [AuthGuard]},    
     {path: "controller/dashboard", component : Dashboard, data: {uuid_restaurante: ""}, canActivate: [AuthGuard]},
     {path: "controller/listagem-pedidos", component : ListagemPedidos, data: {uuid_restaurante: ""}, canActivate: [AuthGuard]},
