@@ -14,10 +14,12 @@ import { Restaurante } from '../../model/restaurante';
 import { PedidoSelecionado } from "../../components/pedido-selecionado/pedido-selecionado";
 import { IPedidoListener } from '../../model/listeners/pedido-listener';
 import { ControlePedidosService } from '../../services/controle-pedidos-service';
+import { Modal } from "../../components/modal/modal";
+import { ModalSimNao } from "../modal-sim-nao/modal-sim-nao";
 
 @Component({
   selector: 'app-listagem-pedidos',
-  imports: [CardPedido, MatProgressBar, Header, Footer, FaIconComponent, PedidoSelecionado],
+  imports: [CardPedido, MatProgressBar, Header, Footer, FaIconComponent, PedidoSelecionado, Modal, ModalSimNao],
   templateUrl: './listagem-pedidos.html',
   providers: [DatePipe],
   styleUrl: './listagem-pedidos.css',

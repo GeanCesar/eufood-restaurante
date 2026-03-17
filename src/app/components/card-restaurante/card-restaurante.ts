@@ -8,6 +8,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { Modal } from "../modal/modal";
 import { IModalSimNaoListener } from '../../model/listeners/modal-sim-nao-listener';
 import { ModalSimNao } from '../../controller/modal-sim-nao/modal-sim-nao';
+import { RestauranteService } from '../../services/restaurante-service';
 
 @Component({
   selector: 'app-card-restaurante',
@@ -25,7 +26,7 @@ export class CardRestaurante implements IModalSimNaoListener {
 
   faTimes = faCircleXmark;
   
-  constructor(private http:HttpClient, private router : Router, private  route : ActivatedRoute) {}
+  constructor(private http:HttpClient, private router : Router, private  route : ActivatedRoute, private restauranteService : RestauranteService) {}
 
   onSim(): void {    
     this.removerRestaurante();
@@ -42,19 +43,12 @@ export class CardRestaurante implements IModalSimNaoListener {
   }
 
   async removerRestaurante() {
-    const url = "/restaurante/deletar";        
-
-    const headers = new HttpHeaders({
-      'Authorization': 'Bearer ' + sessionStorage.getItem("accessToken"),
-      'Content-Type': 'application/json'
-    });
-
-    const parametros = this.restaurante?.uuid ? { params: new HttpParams().set('uuid-restaurante', this.restaurante?.uuid), headers : headers } : {};
-
-    this.http.delete(url, parametros).subscribe(sucesso => {
-          this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
-          this.router.navigate(['/controller/restaurantes'], { relativeTo: this.route });
+      if(this.restaurante) {
+        this.restauranteService.removerRestaurante(this.restaurante.uuid).subscribe(() => {
+            this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+            this.router.navigate(['/controller/restaurantes'], { relativeTo: this.route });
         });
       });
-    }
+    }    
+  }
 }

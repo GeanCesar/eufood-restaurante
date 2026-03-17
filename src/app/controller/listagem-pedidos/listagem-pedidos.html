@@ -38,7 +38,7 @@
                                 <p>Nenhum pedido selecionado...</p>
                             </div>   
                         } @else {
-                            <app-pedido-selecionado [pedidoListener]="getListener()" [pedidoSelecionado]="pedidoSelecionado()" ></app-pedido-selecionado>
+                            <app-pedido-selecionado [modal]="modal_confirmacao" [modalConfirmacao]="app_modal_confirmacao_alteracao" [pedidoListener]="getListener()" [pedidoSelecionado]="pedidoSelecionado()" ></app-pedido-selecionado>
                         }                                                              
                     </div>
                 </div>
@@ -46,6 +46,10 @@
         </div>
     </div>    
 </div>
+
+<app-modal #modal_confirmacao class="modal-deletar">
+    <app-modal-sim-nao #app_modal_confirmacao_alteracao [modal]="modal_confirmacao"></app-modal-sim-nao>
+</app-modal>
 
 <footer></footer>
 
