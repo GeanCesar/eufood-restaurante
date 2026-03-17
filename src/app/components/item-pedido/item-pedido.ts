@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, signal } from '@angular/core';
+import { Component, Input, OnChanges, OnInit, signal, SimpleChanges } from '@angular/core';
 import { ConsultaPedidoItemRest } from '../../model/rest/pedido/consulta-pedido-item-rest';
 import { ItemCardapioService } from '../../services/item-cardapio-service';
 import { MoneyPipe } from '../../util/currency.pipe';
@@ -9,7 +9,7 @@ import { MoneyPipe } from '../../util/currency.pipe';
   templateUrl: './item-pedido.html',
   styleUrl: './item-pedido.css',
 })
-export class ItemPedido implements OnInit{ 
+export class ItemPedido implements OnInit, OnChanges{ 
 
   @Input() item : ConsultaPedidoItemRest = new ConsultaPedidoItemRest;
 
@@ -17,6 +17,9 @@ export class ItemPedido implements OnInit{
 
   constructor(private itemService : ItemCardapioService) {}
 
+  ngOnChanges(): void {
+    this.buscaImagemItem();
+  }
 
   ngOnInit(): void {
     this.buscaImagemItem();
@@ -28,7 +31,6 @@ export class ItemPedido implements OnInit{
           let imagemCriada = URL.createObjectURL(data);
           this.imagemBaixada.set(imagemCriada);
         });
-      }
-    
+      }    
   }
 }
