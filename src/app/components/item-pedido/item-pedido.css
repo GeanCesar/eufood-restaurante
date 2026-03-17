@@ -1,0 +1,80 @@
+* {
+    color: #3E374B;
+}
+
+.quantidade-items {
+    margin-bottom: 10px;
+}
+
+.conteudo-item {
+    margin-bottom: 10px;
+}
+
+.item {
+    display: flex;
+}
+
+.item p {
+    display: inline-block;
+    font-size: 14px;
+}
+
+.container-imagem {
+    width: 80px;
+}
+
+.item-info{
+    width: 100%;
+}
+
+.cabecalho-item {
+    display: flex;
+}
+
+.item p {
+    margin-bottom: 5px;
+}
+
+.item{
+    margin-bottom: 20px;
+}
+
+.item img {
+    margin-right: 20px;
+}
+
+.imagem-item {
+    width: 50px;
+}
+
+.nome-quantidade {
+    width: 100%;
+    font-weight: bold;
+}
+
+.preco {
+    width: 100%;
+    text-align: right;
+    font-weight: bold;
+}
+
+.subitem {
+    display: flex;
+    margin-left: 30px;
+}
+
+.subitem p {
+    display: inline-block;
+    font-weight: 400;
+    margin-bottom: 5px;
+    font-size: 12px;
+}
+
+.subitem p:first-child {
+    width: 100%;
+}
+
+.subitem p:last-child {
+    width: 100%;
+    text-align: right;
+}

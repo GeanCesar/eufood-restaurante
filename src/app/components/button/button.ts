@@ -10,6 +10,5 @@ export class Button {
 
   @Input() texto ? : string;
   @Input() disabled ? : boolean;
-  @Input() primario ? : boolean = true;
-
+  @Input() estilo ? : string;
 }

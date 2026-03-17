@@ -21,3 +21,53 @@
 .cabecalho-tela .nome-tela{
   font-weight: bold;
 }
+
+.container-conteudo {
+  background-color: transparent;
+  display: flex;
+}
+
+.container {
+  text-align: center;
+  align-self: center;
+  margin-top: -200px;
+}
+
+.container-botoes {
+  background-color: white;
+  text-align: center;
+  border-radius: 10px;
+  padding: 30px;
+  display: inline-block;
+}
+
+.container-botoes button {
+    background-color: white;
+    border: 1px solid #f5f5f5;
+    display: inline-block;
+    text-align: center;
+    margin: 10px ;
+    border-radius: 10px 10px 10px 10px;
+    min-width: 170px;
+    padding: 0px;
+    box-shadow: 1px 3px 3px 1px #eff3fbcc;
+    color: #3E374B;
+    padding: 20px;
+    font-size: 16px;
+    font-weight: bold;
+    min-width: 150px;  
+}
+
+.container-botoes button:hover {
+    cursor: pointer;
+}
+
+.container-botoes button:active {
+    box-shadow: inset 2px 2px 3px 3px #eff3fbcc;
+}
+
+.container-botoes button fa-icon {
+  display: block;
+  font-size: 28px;  
+  margin-bottom: 10px;  
+}

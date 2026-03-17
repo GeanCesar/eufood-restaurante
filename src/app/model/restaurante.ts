@@ -1,5 +1,5 @@
 export class Restaurante {
-    uuid? : string;
+    uuid : string = "";
     nome? : string;
     imagemPerfil? : string;
     imagemBaixada ? : string;

@@ -1,0 +1,21 @@
+<div class="conteudo-item">
+    <div class="item">
+        <div class="container-imagem">
+            <img class="imagem-item" [src]="imagemBaixada()">
+        </div>
+        <div class="item-info">
+            <div class="cabecalho-item">
+                <p class="nome-quantidade">{{item.quantidade}}x -  {{item.nome}}</p>
+                <p class="preco">{{item.valorTotal | moneyFormat}}</p>    
+            </div>
+            <div class="subitens">
+                @for(subitem of item.subItems; track $index) {
+                    <div class="subitem">
+                        <p class="nome-quantidade">{{item.quantidade}}x - {{subitem.nome}}</p>
+                        <p class="preco">{{subitem.valorTotal | moneyFormat}}</p>
+                    </div>
+                }
+            </div>            
+        </div>
+    </div>
+</div>

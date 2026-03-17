@@ -19,4 +19,17 @@ export class PedidoService {
 
         return this.httpClient.get<ConsultaPedidoRest[]>(baseUrl, {headers : headers});
     }
+
+    atualizarStatusPedido(status : String, uuidRestaurante : String, uuidPedido : String) : Observable<String> {
+
+        let baseUrl = '/pedido/atualizar/status?uuid-restaurante=' + uuidRestaurante + "&status=" + status + "&uuid-pedido=" + uuidPedido;
+
+        const headers = new HttpHeaders({
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + sessionStorage.getItem("accessToken")
+        });
+
+        return this.httpClient.patch<String>(baseUrl, "", {headers : headers});
+
+    }
 }

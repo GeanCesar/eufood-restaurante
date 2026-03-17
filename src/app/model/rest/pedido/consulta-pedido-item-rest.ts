@@ -9,4 +9,6 @@ export class ConsultaPedidoItemRest{
 	descricao ? : string ;
 	nome ? : string ;
 	subItems ? : ConsultaPedidoSubItemRest[] ;
+	
+    imagemBaixada ? : string;
 }

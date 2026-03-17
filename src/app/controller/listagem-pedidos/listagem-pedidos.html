@@ -9,12 +9,13 @@
 </div>
 
 <div class="container-conteudo">
-    <div class="area-notificacao">
-        <div class="novo-pedido-container enter-animation">
-            <p>2 novos pedido aguardando confirmação</p>
+    @if(mostrandoNovosPedidos()) {
+        <div class="area-notificacao">
+            <div class="novo-pedido-container enter-animation">
+                <p>Novos pedidos aguardando confirmação</p>
+            </div>
         </div>
-    </div>
-    
+    }
 
     <div class="container">
         <div class="container-pedidos">
@@ -27,14 +28,18 @@
                 <div class="col-md-12 conteudo-pedidos">
                     <div class="col-md-4 ">
                         @for(pedido of pedidos(); track $index) {
-                            <app-card-pedido [pedido]="pedido" />
+                            <app-card-pedido [pedido]="pedido" (click)="carregaPedido(pedido)" />
                         }
                     </div>
-                    <div class="col-md-8 conteudo-pedido">         
-                        <div class="nenhum">
-                            <fa-icon [icon]="faBasketShopping"></fa-icon>
-                            <p>Nenhum pedido selecionado...</p>
-                        </div>                                       
+                    <div class="col-md-8 conteudo-pedido">      
+                        @if(!pedidoSelecionado().uuidPedido){
+                            <div class="nenhum">
+                                <fa-icon [icon]="faBasketShopping"></fa-icon>
+                                <p>Nenhum pedido selecionado...</p>
+                            </div>   
+                        } @else {
+                            <app-pedido-selecionado [pedidoListener]="getListener()" [pedidoSelecionado]="pedidoSelecionado()" ></app-pedido-selecionado>
+                        }                                                              
                     </div>
                 </div>
             }

@@ -8,8 +8,16 @@
 
 <div class="container-conteudo">
     <div class="container">
-        <button (click)="abrirCardapio()">Cardapio</button>
-        <button (click)="abrirPedidos()">Pedidos</button>
+        <div class="container-botoes">
+            <button (click)="abrirCardapio()">
+                <fa-icon [icon]="faBookOpen"></fa-icon>
+                Cardapio
+            </button>
+            <button (click)="abrirPedidos()">
+                <fa-icon [icon]="faReceipt"></fa-icon>
+                Pedidos
+            </button>
+        </div>
     </div>
 </div>
 

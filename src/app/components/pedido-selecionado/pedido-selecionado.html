@@ -1,0 +1,54 @@
+
+<div class="pedido">
+    <div class="cabecalho-pedido">
+        <label class="numero-pedido">Pedido #{{pedidoSelecionado.numeroPedido}}</label>
+        <label class="status-pedido">Pedido {{pedidoSelecionado.status[0].status?.toLowerCase()}}</label>
+    </div>
+
+    <div class="pedido">
+        <div class="container-item-pedido">
+            <div class="conteudo-items">
+                <div class="quantidade-items">
+                    <p>{{pedidoSelecionado.items.length}} {{pedidoSelecionado.items.length > 1 ? 'itens' : 'item'}} adicionado{{pedidoSelecionado.items.length > 1 ? 's' : ''}}</p>
+                </div>
+                
+                @for(item of pedidoSelecionado.items; track $index) {
+                    <app-item-pedido [item]="item"></app-item-pedido>            
+                }
+            </div>
+
+            <div class="separator"></div> 
+
+            <div class="info-pedido">
+                <div class="container-flex">
+                    <p class="label-nome">Valor do pedido</p>
+                    <p class="label-valor">{{(pedidoSelecionado.valorTotal - pedidoSelecionado.valorFrete) | moneyFormat}}</p>
+                </div>
+
+                <div class="container-flex">
+                    <p class="label-nome">Valor do frete</p>
+                    <p class="label-valor">{{pedidoSelecionado.valorFrete | moneyFormat}}</p>
+                </div>
+
+                <div class="container-flex">
+                    <p class="negrito valor-nome">Valor total do pedido</p>
+                    <p class="negrito valor-total">{{pedidoSelecionado.valorTotal | moneyFormat}}</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="area-botoes">
+            @if(pedidoSelecionado.status[0].status === "CRIADO") {
+                <app-button (click)="confirmarPedido()" estilo="botao-verde" texto="Confirmar pedido"></app-button>
+            } @else if(pedidoSelecionado.status[0].status === "CONFIRMADO") {
+                <app-button (click)="despacharPedido()" texto="Despachar pedido"></app-button>
+            }
+
+            @if(pedidoSelecionado.status[0].status === "CONFIRMADO" || pedidoSelecionado.status[0].status === "CRIADO") {
+                <app-button (click)="cancelarPedido()" estilo="botao-negativo" texto="Cancelar pedido"></app-button>
+            }
+        </div>
+        
+    </div>
+    
+</div>

@@ -1,6 +1,4 @@
-.botao-primario {
-    background-color: #F3BC08;
-    color: white;
+.botao {    
     border-radius: 10px;
     padding: 13px 45px;
     border: 0;
@@ -10,16 +8,33 @@
     opacity: 1;
 }
 
+.botao-primario {
+    background-color: #F3BC08;
+    color: white;
+}
+
+.botao-verde {
+    background-color: #5fbd7b;
+    color: white;
+}
+
+.botao-verde:active {
+    background-color: #4da768;
+}
+
+.botao-negativo {
+    background-color: #B03050;
+    color: white;
+}
+
+.botao-negativo:active {
+    background-color: #a12746;
+}
+
 .botao-secundario {
     border: 1px solid #F3BC08;
     background-color: transparent;    
     color: #F3BC08;
-    border-radius: 10px;
-    padding: 13px 45px;
-    font-weight: 600;
-    text-align: center;
-    font-size: 12px;
-    opacity: 1;
 }
 
 button:hover{
