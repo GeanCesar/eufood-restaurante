@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { CategoriaSubItemRest } from "../model/rest/cardapio/categoria-sub-item-rest";
-import { HttpClient, HttpHeaders } from "@angular/common/http";
+import { HttpClient, HttpHeaders, HttpParams } from "@angular/common/http";
 import { Observable } from "rxjs";
 
 @Injectable({providedIn: 'root'})
@@ -18,5 +18,21 @@ export class SubItemService {
         });
 
         return this.httpClient.get<CategoriaSubItemRest[]>(baseUrl, {headers : headers});
+    }
+
+    // Atualiza ordens dos itens via requisição PATCH
+    enviaAtualizacaoOrdem(uuid : string, ordem : number) : Observable<string> {
+        const url = '/restaurante/sub_item/atualizar_ordem';
+
+        const headers = new HttpHeaders({
+            'Authorization': 'Bearer ' + sessionStorage.getItem("accessToken"),
+            'Content-Type': 'application/json'
+        });
+
+        const params = new HttpParams().set("uuid-item-subitem", uuid).set("ordem", ordem.toString());
+
+        const parametros = { params: params, headers : headers}
+
+        return this.httpClient.patch<string>(url, "", parametros);        
     }
 }

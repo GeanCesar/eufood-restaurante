@@ -8,10 +8,12 @@ import { IPedidoListener } from '../../model/listeners/pedido-listener';
 import { ModalSimNao } from '../../controller/modal-sim-nao/modal-sim-nao';
 import { Modal } from '../modal/modal';
 import { IModalSimNaoListener } from '../../model/listeners/modal-sim-nao-listener';
+import { TitleCasePipe } from '@angular/common';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-pedido-selecionado',
-  imports: [ItemPedido, MoneyPipe, Button],
+  imports: [ItemPedido, MoneyPipe, Button, TitleCasePipe, DatePipe],
   templateUrl: './pedido-selecionado.html',
   styleUrl: './pedido-selecionado.css',
 })
@@ -64,7 +66,12 @@ export class PedidoSelecionado implements IModalSimNaoListener{
         this.pedidoListener.onAtualizaStatus(this.pedidoSelecionado);
       }
     });
-  }
+  }  
+}
+
+function primeiraMaiuscula(str: string) {
+  if (!str) return str;
+  return str[0].toUpperCase() + str.substr(1).toLowerCase();
 }
 
 

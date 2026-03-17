@@ -54,17 +54,23 @@ export class ListagemPedidos implements OnInit, IPedidoListener {
         this.restauranteService.buscaRestaurante(params['uuid_restaurante']).subscribe(data => {
           this.restaurante.set(data);
           this.buscaControle();
+          this.buscaPedidos();
         }); 
         this.buscaPedidos();
-
-        // Busca o controle de pedidos a cada 30 segundos
-        setInterval(()=> { this.buscaControle() }, 30 * 1000);
+        this.iniciaThreads();
       });
     } else {
       this.buscaPedidos();
-      // Busca o controle de pedidos a cada 30 segundos
-      setInterval(()=> { this.buscaControle() }, 30 * 1000);
+      this.iniciaThreads();
     }
+  }
+
+  iniciaThreads(){    
+    // Busca o controle de pedidos a cada 30 segundos
+    setInterval(()=> { this.buscaControle() }, 30 * 1000);
+
+    // Força listagem dos pedidos a cada 3 minutos
+    setInterval(()=> { this.buscaControle() }, 3 * 60 * 1000);
   }
 
   buscaControle() {

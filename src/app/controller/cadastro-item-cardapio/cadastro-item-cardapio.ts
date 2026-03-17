@@ -16,9 +16,11 @@ import { Header } from "../../components/header/header";
 import { Footer } from '../../components/footer/footer';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import {Location} from '@angular/common';
-import { CurrencyI18nDirective } from '../../util/currency-i18n.directive';
 import { CurrencyPipe } from '@angular/common';
 import { ItemCardapioService } from '../../services/item-cardapio-service';
+import { CategoriaItemService } from '../../services/categoria-item-service';
+import { Restaurante } from '../../model/restaurante';
+import { RestauranteService } from '../../services/restaurante-service';
 
 @Component({
   selector: 'app-cadastro-item-cardapio',
@@ -33,23 +35,29 @@ export class CadastroItemCardapio implements OnInit, IFileChooserListener {
 
   item = signal<ItemCardapio>(new ItemCardapio());
     
-  constructor(private http:HttpClient, private router : Router, private route: ActivatedRoute, private _location : Location, private itemService : ItemCardapioService) {}
+  constructor(private http:HttpClient, private router : Router, private route: ActivatedRoute, private _location : Location, private restauranteService : RestauranteService, private categoriaService : CategoriaItemService, private itemService : ItemCardapioService) {}
 
   @Input() subItem ? : Checkbox;
   @ViewChild('fileUpload') fileSelector? : FileChooser;
 
-  uuidRestaurante : string = "";
   uuidItemAlteracao ? : string;
+  restaurante : Restaurante = new Restaurante();
 
   ngOnInit(): void {
     this.route.queryParams.subscribe((params: Params) => {
-      this.uuidRestaurante = params['uuid_restaurante'];
+      this.restaurante = new Restaurante();
+      this.restaurante.uuid = params['uuid_restaurante'];
       this.uuidItemAlteracao = params['uuid_item'];
+
+      if(this.restaurante.uuid) {
+        this.restauranteService.buscaRestaurante(this.restaurante.uuid).subscribe(data => {
+          this.restaurante = data;
+          this.buscarItem();
+          this.buscarCategorias();
+          this.fileSelector?.setListener(this);
+        });
+      }      
     });
-   
-    this.buscarItem();
-    this.buscarCategorias();
-    this.fileSelector?.setListener(this);
   }
 
   carregaImagem(item : ItemCardapio){
@@ -68,20 +76,8 @@ export class CadastroItemCardapio implements OnInit, IFileChooserListener {
 
   buscarItem(){
     if(this.uuidItemAlteracao) {
-
-      const url = "/restaurante/item_cardapio/buscar";
-
-      const headers = new HttpHeaders({
-        'Authorization': 'Bearer ' + sessionStorage.getItem("accessToken"),
-        'Content-Type': 'application/json'
-      });
-
-      const params = new HttpParams().set("uuid-item", this.uuidItemAlteracao);
-
-      const parametros = { params: params, headers : headers}
-
-      this.http.get<ItemCardapio>(url,  parametros).subscribe(data => {        
-          this.carregaCampos(data);
+      this.itemService.buscarItem(this.uuidItemAlteracao).subscribe(data => {
+        this.carregaCampos(data);
       });
     }
   }
@@ -95,12 +91,12 @@ export class CadastroItemCardapio implements OnInit, IFileChooserListener {
   }
 
   alteraCategoria(event: any) {
-    if(event != null) {
+    if(event != null && this.restaurante) {
       if((event as CategoriaItemCardapio).uuid) {
         this.item().categoria = event;
       } else {        
         event = event as ItemGenerico;
-        let categoria = new CategoriaItemCardapio(event.label, this.uuidRestaurante);
+        let categoria = new CategoriaItemCardapio(event.label, this.restaurante?.uuid);
         
         categoria.itensAdicionados = [];
         categoria.ordem = 0;
@@ -127,22 +123,13 @@ export class CadastroItemCardapio implements OnInit, IFileChooserListener {
   }
 
   private buscarCategorias(){
-      const url = "/restaurante/categoria/listar";
-
-      const headers = new HttpHeaders({
-        'Authorization': 'Bearer ' + sessionStorage.getItem("accessToken"),
-        'Content-Type': 'application/json'
+    if(this.restaurante) {
+      this.categoriaService.listarCategorias(this.restaurante.uuid).subscribe(data => {
+        for(let categoria of data as Array<CategoriaItemCardapio> ) {
+          this.categorias.update(values => [...values, categoria]);
+        }
       });
-
-      const params = new HttpParams().set("uuid-restaurante", this.uuidRestaurante);
-
-      const parametros = { params: params, headers : headers}
-
-      this.http.get(url,  parametros).subscribe(data => {
-          for(let categoria of data as Array<CategoriaItemCardapio> ) {
-            this.categorias.update(values => [...values, categoria]);
-          }
-      });
+    }
   }
 
   getCategorias() : OptionDataList[] {
@@ -175,7 +162,7 @@ export class CadastroItemCardapio implements OnInit, IFileChooserListener {
   }
 
   enviar() {
-    this.item().uuidRestaurante = this.uuidRestaurante;
+    this.item().uuidRestaurante = this.restaurante?.uuid;
     let rest = new CadastrarItemCardapioRest();
     rest.fromItemCardapio(this.item());
     this.cadastrarItem(rest);
@@ -212,10 +199,10 @@ export class CadastroItemCardapio implements OnInit, IFileChooserListener {
   }
 
   async uploadImagem(): Promise<void> {
-    if(this.fileSelector?.file && this.item().uuid) {
+    if(this.fileSelector?.file && this.item().uuid && this.restaurante) {
       const formData = new FormData();
       formData.append("file", this.fileSelector.file);
-      formData.append("uuid-restaurante", this.uuidRestaurante);
+      formData.append("uuid-restaurante", this.restaurante.uuid);
 
       let uuidItem = this.item().uuid;
       if(uuidItem){
@@ -235,7 +222,9 @@ export class CadastroItemCardapio implements OnInit, IFileChooserListener {
       })     
       .subscribe(data => {
         if(data.type == HttpEventType.Response) {
-          this.router.navigate(['controller/alteracao-item-cardapio'], { queryParams: { uuid_restaurante : this.uuidRestaurante}});
+          if(this.restaurante) {
+            this.router.navigate(['controller/alteracao-item-cardapio'], { queryParams: { uuid_restaurante :  this.restaurante.uuid}});
+          }
         }        
       });      
     }    

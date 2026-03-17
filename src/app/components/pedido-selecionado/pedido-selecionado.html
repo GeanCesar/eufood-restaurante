@@ -19,6 +19,16 @@
 
             <div class="separator"></div> 
 
+            <div class="historico-pedido">                
+                <p class="historico">Histórico</p>
+                @for(status of pedidoSelecionado.status; track $index) {
+                    <div class="container-flex">
+                        <p class="label-nome">{{status.status | titlecase}}</p>
+                        <p class="label-valor">{{status.dataHora | date : 'EEEE - HH:mm'}}</p>
+                    </div>
+                }
+            </div>
+
             <div class="info-pedido">
                 <div class="container-flex">
                     <p class="label-nome">Valor do pedido</p>

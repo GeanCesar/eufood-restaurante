@@ -20,6 +20,7 @@ import { ISelecaoSubItemListener } from '../../model/listeners/selecao-sub-item-
 import { ActivatedRoute, Params } from '@angular/router';
 import { Header } from "../../components/header/header";
 import { Footer } from '../../components/footer/footer';
+import { SubItemService } from '../../services/sub-item-service';
 
 @Component({
   selector: 'app-selecao-sub-item',
@@ -40,7 +41,7 @@ export class SelecaoSubItem implements OnInit, ISelecaoSubItemListener {
   categoriaSelecionada = signal<CategoriaSubItem>(new CategoriaSubItem(""));  
   subItensSelecionados = signal<SubItemCardapioRest[]>([]);
   
-  constructor(private http:HttpClient, private route: ActivatedRoute) {}
+  constructor(private http:HttpClient, private route: ActivatedRoute, private subItemService : SubItemService) {}
 
   uuidItemPrincipal : string = "";
 
@@ -156,30 +157,15 @@ export class SelecaoSubItem implements OnInit, ISelecaoSubItemListener {
   }
 
   // Associa novos subitens via requisição PUT 
-  associaNovoSubItem(subItem : SubItemCardapioRest, categoria: CategoriaSubItem) {    
+  associaNovoSubItem(subItem : SubItemCardapioRest, categoria: CategoriaSubItem) {   
+    
     if(subItem.uuid && categoria.uuid) {
-      const url = '/restaurante/sub_item/associar_sub_item';
-
-      const headers = new HttpHeaders({
-          'Authorization': 'Bearer ' + sessionStorage.getItem("accessToken"),
-          'Content-Type': 'application/json'
-        });
-      
-      const params = new HttpParams().set("uuid-sub-item", subItem.uuid)
-          .set("uuid-item-principal", this.uuidItemPrincipal)
-          .set("uuid-categoria", categoria.uuid)
-          .set("ordem", 0);
-
-      const parametros = { params: params, headers : headers}
-
-      this.http.put(url, "", parametros).subscribe(data => {
-          if(data) {
+      this.subItemService.enviaAtualizacaoOrdem(subItem.uuid, 0).subscribe(data => {
+        if(data) {
             subItem.uuidAssociacao = data as string;
             this.atualizaOrdem();
           }
-        }, error => {
-          console.log(error);
-        });
+      });
     }
   }
 

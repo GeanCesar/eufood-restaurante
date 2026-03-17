@@ -66,3 +66,27 @@
 .area-botoes app-button:first-child {
     margin-right: 10px;
 }
+
+.cabecalho-tela {
+  min-height: 44px;
+}
+
+.cabecalho-tela {
+  background-color: #eaeaea;
+}
+
+.cabecalho-tela .nome-restaurante {
+  color: #6A33CA;
+  font-weight: bold;
+}
+
+.cabecalho-tela p {
+  display: inline-block;
+  color: #3E374B;
+  margin-left: 30px;
+  margin-bottom: 5px;
+}
+
+.cabecalho-tela .nome-tela{
+  font-weight: bold
+}

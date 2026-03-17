@@ -27,6 +27,16 @@
             } @else {
                 <div class="col-md-12 conteudo-pedidos">
                     <div class="col-md-4 ">
+
+                        @if(pedidos().length == 0) {
+                            <div class="nenhum-pedido">
+                                <div>
+                                    <fa-icon [icon]="faBasketShopping"></fa-icon>
+                                    <p>Nenhum pedido encontrado...</p>
+                                </div>
+                            </div>
+                        }
+
                         @for(pedido of pedidos(); track $index) {
                             <app-card-pedido [pedido]="pedido" (click)="carregaPedido(pedido)" />
                         }

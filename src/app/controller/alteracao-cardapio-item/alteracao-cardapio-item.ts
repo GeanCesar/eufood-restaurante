@@ -140,51 +140,38 @@ export class AlteracaoCardapioItem implements OnInit {
     }
     
   }
-
-  // Executa o GET para listagem de itens
+  
   listaItens(){
     if(this.restaurante.uuid){
-      const url = '/restaurante/item_cardapio/listar';
-
-      const headers = new HttpHeaders({
-        'Content-Type': 'application/json',
-        'Authorization': 'Bearer ' + sessionStorage.getItem("accessToken")
-      });
-      
-      const params = new HttpParams().set("uuid-restaurante", this.restaurante.uuid);
-
-      const parametros = { params: params, headers : headers}
-
-      this.http.get<Array<ItemCardapio>>(url, parametros).subscribe(data => {
-          for(let item of data ) {
+      this.itemService.listaItens(this.restaurante.uuid).subscribe(data => {
+          for(let item of data) {
             for(let categoria of this.categoriasBuscadas) {
-              if(item.categoria?.uuid === categoria.uuid && item.uuid && this.restaurante.uuid) {
+                if(item.categoria?.uuid === categoria.uuid && item.uuid && this.restaurante.uuid) {
                 this.subItemService.getCategorias(this.restaurante.uuid, item.uuid).subscribe((subs) => {
-                  item.categoriaSubItens = subs;
+                    item.categoriaSubItens = subs;
                 });
 
                 categoria.itensAdicionados.push(item);
-              }
+                }
             }
             
             if(item.uuid) {
-              this.itemService.buscaImagem(item.uuid).subscribe((arquivo) => {
+                this.itemService.buscaImagem(item.uuid).subscribe((arquivo) => {
                 var imagem = URL.createObjectURL(arquivo)  
                 item.imagemBaixada = imagem;   
                 item.imagemCarregada = true;
-              });
+                });
             }
           }
 
           setTimeout(() => {
-            this.categorias.set(this.categoriasBuscadas);
-            this.carregando.set(false);
+          this.categorias.set(this.categoriasBuscadas);
+          this.carregando.set(false);
           }, 300);
-      }, error => {
+      }, () => {
           this.categorias.set(this.categoriasBuscadas);
           this.carregando.set(false);
       });
-    }
-    
+    }    
   }
 }

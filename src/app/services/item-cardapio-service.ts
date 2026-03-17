@@ -1,11 +1,27 @@
 import { Injectable } from "@angular/core";
 import { HttpClient, HttpHeaders, HttpParams } from "@angular/common/http";
 import { Observable } from "rxjs";
+import { ItemCardapio } from "../model/item-cardapio";
 
 @Injectable({providedIn: 'root'})
 export class ItemCardapioService {
 
     constructor(private httpClient : HttpClient) {}
+    
+    listaItens(uuidRestaurante : string) : Observable<ItemCardapio[]>{    
+        const url = '/restaurante/item_cardapio/listar';
+
+        const headers = new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + sessionStorage.getItem("accessToken")
+        });
+        
+        const params = new HttpParams().set("uuid-restaurante", uuidRestaurante);
+
+        const parametros = { params: params, headers : headers}
+
+        return this.httpClient.get<ItemCardapio[]>(url, parametros);    
+    }
 
     buscaImagem(uuidItem : string): Observable<Blob> {
         let baseUrl = 'restaurante/sub_item/imagem_item?uuid-item-cardapio=' + uuidItem
@@ -19,6 +35,21 @@ export class ItemCardapioService {
             headers : headers,
             responseType: 'blob' as 'json'
         });
+    }
+
+    buscarItem(uuidItem : string) : Observable<ItemCardapio>{
+        const url = "/restaurante/item_cardapio/buscar";
+
+        const headers = new HttpHeaders({
+            'Authorization': 'Bearer ' + sessionStorage.getItem("accessToken"),
+            'Content-Type': 'application/json'
+        });
+
+        const params = new HttpParams().set("uuid-item", uuidItem);
+
+        const parametros = { params: params, headers : headers}
+
+        return this.httpClient.get<ItemCardapio>(url,  parametros);       
     }
 
     removerItem(uuidRestaurante : string, uuidItem : string) : Observable<boolean> {

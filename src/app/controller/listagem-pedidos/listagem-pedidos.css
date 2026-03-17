@@ -53,6 +53,22 @@
     margin-bottom: 20px;
 }
 
+.nenhum-pedido {
+  background: white;
+  border-radius: 10px;
+  padding: 20px;
+  text-align: center;
+  margin-top: 10px;
+}
+
+.nenhum-pedido div {
+  opacity: 0.2;
+}
+
+.nenhum-pedido fa-icon {
+  font-size: 30px;
+}
+
 .conteudo-pedido {
     background-color: white;
     border-radius: 10px;
