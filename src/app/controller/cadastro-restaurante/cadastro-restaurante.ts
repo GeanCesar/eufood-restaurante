@@ -4,9 +4,10 @@ import { Button } from "../../components/button/button";
 import { FileChooser } from "../../components/file-chooser/file-chooser";
 import { Textfield } from "../../components/textfield/textfield";
 import { FormsModule } from '@angular/forms';
-import { HttpClient, HttpEvent, HttpEventType, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpEventType, HttpHeaders } from '@angular/common/http';
 import { Restaurante } from '../../model/restaurante';
-import { ActivatedRoute, Route, Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { RestauranteService } from '../../services/restaurante-service';
 
 @Component({
   selector: 'app-cadastro-restaurante',
@@ -18,7 +19,7 @@ export class CadastroRestaurante {
   
   @ViewChild('fileUpload') fileSelector? : FileChooser;
 
-  constructor(private http:HttpClient, private router : Router, private  route : ActivatedRoute) {}
+  constructor(private http:HttpClient, private router : Router, private  route : ActivatedRoute, private restauranteService : RestauranteService) {}
   
   isDisabled = signal(false);  
   progress = signal(false);  
@@ -28,27 +29,18 @@ export class CadastroRestaurante {
   
   async onSubmit(): Promise<void> {  
     
-    const url = "/restaurante/cadastrar";      
     this.isDisabled.set(true);
     this.progress.set(true);
-
-    const headers = new HttpHeaders({
-      'Authorization': 'Bearer ' + sessionStorage.getItem("accessToken"),
-      'Content-Type': 'application/json'
+    
+    this.restauranteService.cadastrar(this.restaurante).subscribe(data => {
+      this.uuidRestaurante = data;
+      this.uploadImagem();     
+      this.isDisabled.set(false);
+      this.progress.set(false); 
+    }, () => {
+      this.progress.set(false);
+      this.isDisabled.set(false);
     });
-
-    this.http.post(url, this.restaurante, {      
-        headers : headers,
-        responseType: 'text'
-      }).subscribe(data => {        
-        this.uuidRestaurante = data;
-        this.uploadImagem();     
-        this.isDisabled.set(false);
-        this.progress.set(false);   
-      }, () => {
-        this.progress.set(false);
-        this.isDisabled.set(false);
-      });
   }
 
   async uploadImagem(): Promise<void> {

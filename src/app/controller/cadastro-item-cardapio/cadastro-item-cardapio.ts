@@ -87,9 +87,7 @@ export class CadastroItemCardapio implements OnInit, IFileChooserListener {
   }
 
   alterarSubitens() {
-    this.router.navigate(['/controller/selecao-sub-item'], { queryParams: { uuid_restaurante : this.restaurante.uuid, uuid_item_principal : this.item().uuid}});
-    //this.router.navigate(['/controller/selecao-sub-item', this.item().uuid]);
-  }
+    this.router.navigate(['/controller/selecao-sub-item'], { queryParams: { uuid_restaurante : this.restaurante.uuid, uuid_item_principal : this.item().uuid}});}
 
   alteraCategoria(event: any) {
     if(event != null && this.restaurante) {

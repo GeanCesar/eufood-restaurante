@@ -2,6 +2,7 @@ import { Injectable } from "@angular/core";
 import { CategoriaSubItemRest } from "../model/rest/cardapio/categoria-sub-item-rest";
 import { HttpClient, HttpHeaders, HttpParams } from "@angular/common/http";
 import { Observable } from "rxjs";
+import { ItemCardapio } from "../model/item-cardapio";
 
 @Injectable({providedIn: 'root'})
 export class SubItemService {
@@ -34,5 +35,17 @@ export class SubItemService {
         const parametros = { params: params, headers : headers}
 
         return this.httpClient.patch<string>(url, "", parametros);        
+    }
+
+    // Executa o GET para listagem de subitens
+    listaSubitens(uuidRestaurante : string) : Observable<ItemCardapio[]>{
+        const url = '/restaurante/sub_item/listar?uuid-restaurante=' + uuidRestaurante;
+
+        const headers = new HttpHeaders({
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + sessionStorage.getItem("accessToken")
+        });
+
+        return this.httpClient.get<ItemCardapio[]>(url,  { headers : headers});
     }
 }

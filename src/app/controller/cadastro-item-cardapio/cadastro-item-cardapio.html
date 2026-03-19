@@ -29,7 +29,7 @@
                     </div>
 
                     <div class="col-md-9">
-                        <app-datalist name="selectCategoria" placeholder="Selecione a categoria" (onSeleciona)="alteraCategoria($event)" [adicionaItem]=true  [itens]=getCategorias() ngDefaultControl></app-datalist>
+                        <app-datalist #data_list [(ngModel)]="item().categoria" name="selectCategoria" placeholder="Selecione a categoria" (onSeleciona)="alteraCategoria($event)" [adicionaItem]=true  [itens]=getCategorias() ngDefaultControl></app-datalist>
                     </div>
                 </div>
 

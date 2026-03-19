@@ -64,6 +64,7 @@ export class SelecaoSubItem implements OnInit, ISelecaoSubItemListener {
   mostraModal(){
     this.modalSelecaoItem?.setListener(this);
     this.modalSelecaoItem?.setItemsIgnored(this.subItensSelecionados())
+    this.modalSelecaoItem?.setUuidRestaurante(this.uuidRestaurante);
     this.modalSelecaoItem?.mostrarModal();
   }
 

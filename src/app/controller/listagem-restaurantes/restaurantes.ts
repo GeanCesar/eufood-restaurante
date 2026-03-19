@@ -11,6 +11,7 @@ import { CadastroRestaurante } from "../cadastro-restaurante/cadastro-restaurant
 import { Modal } from "../../components/modal/modal";
 import { ModalSimNao } from "../modal-sim-nao/modal-sim-nao";
 import { ActivatedRoute, Router } from '@angular/router';
+import { RestauranteService } from '../../services/restaurante-service';
 
 @Component({
   selector: 'app-restaurantes',
@@ -22,7 +23,7 @@ export class Restaurantes implements OnInit{
 
   restaurantes = signal<Restaurante[]>([]);
 
-  constructor(private http:HttpClient, private router : Router, private route : ActivatedRoute) {}
+  constructor(private http:HttpClient, private router : Router, private route : ActivatedRoute, private restauranteService : RestauranteService ) {}
 
   faPlus = faPlus;
 
@@ -31,17 +32,9 @@ export class Restaurantes implements OnInit{
   ngOnInit(): void {
     if(!this.buscouItens) {
       this.buscouItens = true;
-      const url = '/restaurante/listar/usuario';
-
-      const headers = new HttpHeaders({
-        'Content-Type': 'application/json',
-        'Authorization': 'Bearer ' + sessionStorage.getItem("accessToken")
-      });
-
-      this.http.get<Array<Restaurante>>(url,  { headers : headers}).subscribe(data => {
+      this.restauranteService.listarPorUsuario().subscribe(data => {
           for(let restaurante of data) {
             this.restaurantes.update(values => [...values, restaurante]);
-
             setTimeout(() => this.buscaImagem(restaurante), 100);
           }
       });
@@ -49,24 +42,13 @@ export class Restaurantes implements OnInit{
   } 
 
   buscaImagem(restaurante: Restaurante) : void {
+    this.restauranteService.buscaImagem(restaurante).subscribe(data => {
+      var imagem = URL.createObjectURL(data as Blob)
 
-    const url = '/restaurante/imagem_perfil?uuid-restaurante=' + restaurante.uuid;
+      restaurante.imagemBaixada = imagem;   
+      restaurante.imagemCarregada = true;
 
-    const headers = new HttpHeaders({
-      'Authorization': 'Bearer ' + sessionStorage.getItem("accessToken"),
-      'Content-Type': 'application/x-www-form-urlencoded'
-    });
-    
-    this.http.get(url, {
-        headers : headers,
-        responseType: 'blob', observe: 'response'
-      }).subscribe(data => {
-        var imagem = URL.createObjectURL(data.body as Blob)
-
-        restaurante.imagemBaixada = imagem;   
-        restaurante.imagemCarregada = true;
-
-        this.restaurantes.update( restaurante => restaurante.slice() );
+      this.restaurantes.update( restaurante => restaurante.slice() );
     });
 
   }

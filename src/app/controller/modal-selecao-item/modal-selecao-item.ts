@@ -8,6 +8,8 @@ import { Modal } from '../../components/modal/modal';
 import { ISelecaoSubItemListener } from '../../model/listeners/selecao-sub-item-listener';
 import { FormsModule } from "@angular/forms";
 import { SubItemCardapioRest } from '../../model/rest/cardapio/sub-item-cardapio-rest';
+import { SubItemService } from '../../services/sub-item-service';
+import { ItemCardapioService } from '../../services/item-cardapio-service';
 
 @Component({
   selector: 'app-modal-selecao-item',
@@ -29,7 +31,9 @@ export class ModalSelecaoItem {
     
   itemSelecionado = signal<OptionDataList>(new OptionDataList);
 
-  constructor(private http:HttpClient) {}
+  uuidRestaurante : string = "";
+
+  constructor(private http:HttpClient, private subItemService : SubItemService, private itemService : ItemCardapioService) {}
 
   alteraItem(event: any) {
     if(event != null) {
@@ -55,25 +59,18 @@ export class ModalSelecaoItem {
     this.itens.set([])
     this.itens().splice; 
     this.itemSelecionado.set(new OptionDataList);
-    const url = '/restaurante/sub_item/listar?uuid-restaurante=1d77cd66-78c4-4d7a-847b-242f354f25e9';
 
-    const headers = new HttpHeaders({
-      'Content-Type': 'application/json',
-      'Authorization': 'Bearer ' + sessionStorage.getItem("accessToken")
-    });
+    this.subItemService.listaSubitens(this.uuidRestaurante).subscribe(data => {
+      for(let item of data) {
+        let option : OptionDataList = new OptionDataList();
+        option.objeto = item;
+        option.texto = item.nome;
 
-    this.http.get<Array<ItemCardapio>>(url,  { headers : headers}).subscribe(data => {
-        for(let item of data) {
-          let option : OptionDataList = new OptionDataList();
-          option.objeto = item;
-          option.texto = item.nome;
-
-          if(this.podeAdicionaItem(item.uuid)) {
-            this.itens.update(values => [...values, option]);
-            setTimeout(() => this.buscaImagem(item), 100);
-          }
-          
-        }
+        if(this.podeAdicionaItem(item.uuid)) {
+          this.itens.update(values => [...values, option]);
+          setTimeout(() => this.buscaImagem(item), 100);
+        }        
+      }
     });
   }
 
@@ -94,22 +91,13 @@ export class ModalSelecaoItem {
   }
 
   async buscaImagem(item : ItemCardapio) : Promise<void> {  
-      const url = 'restaurante/sub_item/imagem_item?uuid-item-cardapio=' + item.uuid;
-  
-      const headers = new HttpHeaders({
-        'Authorization': 'Bearer ' + sessionStorage.getItem("accessToken"),
-        'Content-Type': 'application/x-www-form-urlencoded'
-      });
-      
-      this.http.get(url, {
-          headers : headers,
-          responseType: 'blob', observe: 'response'
-        }).subscribe(data => {
-          var imagem = URL.createObjectURL(data.body as Blob)
-  
+    if(item.uuid) {
+      this.itemService.buscaImagem(item.uuid).subscribe(data => {
+          var imagem = URL.createObjectURL(data as Blob)  
           item.imagemBaixada = imagem;   
           item.imagemCarregada = true;
       });
+    }
   }
 
   setListener(listener : ISelecaoSubItemListener){
@@ -118,5 +106,9 @@ export class ModalSelecaoItem {
 
   setItemsIgnored(itemsIgnored : SubItemCardapioRest[]){
     this.itemsIgnored = itemsIgnored;
+  }
+
+  setUuidRestaurante(uuidRestaurante : string) {
+    this.uuidRestaurante = uuidRestaurante;
   }
 }
