@@ -162,10 +162,9 @@ export class SelecaoSubItem implements OnInit, ISelecaoSubItemListener {
   }
 
   // Associa novos subitens via requisição PUT 
-  associaNovoSubItem(subItem : SubItemCardapioRest, categoria: CategoriaSubItem) {   
-    
+  associaNovoSubItem(subItem : SubItemCardapioRest, categoria: CategoriaSubItem) {
     if(subItem.uuid && categoria.uuid) {
-      this.subItemService.enviaAtualizacaoOrdem(subItem.uuid, 0).subscribe(data => {
+      this.subItemService.associarSubItem(subItem.uuid, this.uuidItemPrincipal, categoria.uuid, 1).subscribe(data => {
         if(data) {
             subItem.uuidAssociacao = data as string;
             this.atualizaOrdem();

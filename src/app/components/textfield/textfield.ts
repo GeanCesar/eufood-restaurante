@@ -1,6 +1,6 @@
-import { Component, EventEmitter, Input, Output, signal, ViewChild } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { NgxMaskDirective} from 'ngx-mask';
-import { CurrencyMaskConfig, CurrencyMaskModule } from "ng2-currency-mask";
+import { CurrencyMaskModule } from "ng2-currency-mask";
 import { FormsModule } from "@angular/forms";
 import { CurrencyI18nDirective } from '../../util/currency-i18n.directive';
 
@@ -11,7 +11,7 @@ import { CurrencyI18nDirective } from '../../util/currency-i18n.directive';
   templateUrl: './textfield.html',
   styleUrl: './textfield.css',
 })
-export class Textfield {
+export class Textfield {  
 
   @Input() senha? : boolean = false;
   @Input() texto?: string;
@@ -23,9 +23,7 @@ export class Textfield {
   @Input() valorNumerico ? : number;
 
   @Output() onFocusOut = new EventEmitter();
-  
-  @ViewChild('input') input ? : Input;
-
+ 
   changeInput(input: any): any {
     input.type = input.type === 'text' ? 'password' : 'text';
   }

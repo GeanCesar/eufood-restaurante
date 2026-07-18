@@ -21,6 +21,31 @@ export class SubItemService {
         return this.httpClient.get<CategoriaSubItemRest[]>(baseUrl, {headers : headers});
     }
 
+    // Associa um novo subitem no item principal
+    associarSubItem(uuid : string, uuidItemPrincipal : string, uuidCategoria : string, ordem : number) : Observable<string> {
+        const url = '/restaurante/sub_item/associar_sub_item';
+
+        const headers = new HttpHeaders({
+            'Authorization': 'Bearer ' + sessionStorage.getItem("accessToken"),
+            'Content-Type': 'application/json'
+        });
+
+        const params = new HttpParams()
+            .set("uuid-sub-item", uuid)
+            .set("uuid-item-principal", uuidItemPrincipal)
+            .set("uuid-categoria", uuidCategoria)
+            .set("ordem", ordem);
+
+        const parametros = {
+            params: params,
+            headers: headers,
+            responseType: 'text' as const
+        };
+
+        return this.httpClient.put(url, "", parametros);
+    }
+
+
     // Atualiza ordens dos itens via requisição PATCH
     enviaAtualizacaoOrdem(uuid : string, ordem : number) : Observable<string> {
         const url = '/restaurante/sub_item/atualizar_ordem';

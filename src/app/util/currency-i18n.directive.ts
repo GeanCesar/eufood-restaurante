@@ -1,4 +1,4 @@
-import { Directive, HostListener } from "@angular/core";
+import { Directive } from "@angular/core";
 import { NgControl, NgModel } from "@angular/forms";
 import { CurrencyPipe, DecimalPipe } from "@angular/common";
 
@@ -6,6 +6,7 @@ import { CurrencyPipe, DecimalPipe } from "@angular/common";
   selector: "[appCurrencyI18n]",
   providers: [NgModel, CurrencyPipe, DecimalPipe],
   host: {
+    "(focus)": "onInputChange($event)",
     "(blur)": "onInputChange($event)"
   }
 })
