@@ -38,7 +38,7 @@ export class AlteracaoCardapioItem implements OnInit {
 
   carregando = signal<boolean>(true);
 
-  constructor(private http:HttpClient, private router : Router,
+  constructor(private router : Router,
        private route : ActivatedRoute,
        private subItemService : SubItemService,
        private itemService : ItemCardapioService,
@@ -55,8 +55,7 @@ export class AlteracaoCardapioItem implements OnInit {
           this.restaurante = data;
           this.listaCategorias();
         });
-      }
-      
+      }      
     });
     
   }
@@ -67,7 +66,7 @@ export class AlteracaoCardapioItem implements OnInit {
         return;
       }
 
-      moveItemInArray(this.categorias(), categoria.ordem - 1, categoria.ordem + 1);
+      moveItemInArray(this.categorias(), categoria.ordem - 1, categoria.ordem);
       let itemAnterior = this.categorias()[categoria.ordem - 1];
       if(itemAnterior && itemAnterior.ordem) {
         itemAnterior.ordem = itemAnterior.ordem - 1;
@@ -165,8 +164,8 @@ export class AlteracaoCardapioItem implements OnInit {
           }
 
           setTimeout(() => {
-          this.categorias.set(this.categoriasBuscadas);
-          this.carregando.set(false);
+            this.categorias.set(this.categoriasBuscadas);
+            this.carregando.set(false);
           }, 300);
       }, () => {
           this.categorias.set(this.categoriasBuscadas);
