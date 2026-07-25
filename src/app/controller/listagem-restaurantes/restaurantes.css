@@ -1,9 +1,11 @@
 .container-conteudo {
     padding: 20px;
 }
+
 .titulo {
     font-size: 16px;
     color: #6A33CA;
+    font-weight: bold;
 }
 
 .cabecalho-tela {
